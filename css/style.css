@@ -1,3 +1,14 @@
-h1 {
-    color: red;
+#weather {
+	display: flex;
+	flex-direction: column;
+}
+
+#weather div {
+	display: flex;
+	flex-direction: row;
+}
+
+#weather img {
+	width: 40px;
+	height: 40px;
 }

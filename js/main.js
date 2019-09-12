@@ -1,5 +1,11 @@
-//Fetch current weather and update weather module
 window.onload = function() {
+	//Fetch current weather and update weather module
+	let icon = document.getElementById("weather").getElementsByTagName("img")[0];
+	let temp = document.getElementById("temp");
+	let tempTooltip = document.getElementById("temp-tooltip");
+	let city = document.getElementById("city");
+	let cityTooltip = document.getElementById("city-tooltip");
+
 	if ("geolocation" in navigator) { // Get user's location
 		navigator.geolocation.getCurrentPosition((pos) => {
 			let lat = pos.coords.latitude;
@@ -16,11 +22,12 @@ window.onload = function() {
 		req.onload = function() {
 			if (req.status === 200) {
 				let weatherData = JSON.parse(this.response).data[0];
-				let icon = document.getElementById("weather").getElementsByTagName("img")[0];
 				icon.src = "img/icons/" + weatherData.weather.icon + ".png";
 				icon.alt = weatherData.weather.description; 
-				document.getElementById("temp").innerHTML = ((weatherData.temp * 9/5) + 32).toFixed(0) + "&deg";
-				document.getElementById("city").innerHTML = weatherData.city_name //+ ", " + weatherData.state_code + ", " + weatherData.country_code;
+				temp.innerHTML = ((weatherData.temp * 9/5) + 32).toFixed(0) + "&deg";
+				tempTooltip.innerHTML = weatherData.weather.description;
+				city.innerHTML = weatherData.city_name
+				cityTooltip.innerHTML = weatherData.city_name + ", " + weatherData.state_code + ", " + weatherData.country_code;
 			} else {
 				console.log("error")
 			}

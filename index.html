@@ -8,12 +8,16 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-	<section id="weather">
-		<div>
+	<section id="weather" class="flex">
+		<div class="flex">
 			<img></img>
-			<p id="temp"></p>
+			<span id="temp"></span>
+			<span id="temp-tooltip" class="tooltip"></span>
 		</div>
-		<p id="city"></p>
+		<div class="flex">
+			<span id="city"></span>
+			<span id="city-tooltip" class="tooltip"></span>
+		</div>
 	</section>
 	<script type="text/javascript" src="js/config.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>

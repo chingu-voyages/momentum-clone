@@ -1,6 +1,6 @@
 window.onload = function() {
 	//Fetch current weather and update weather module
-	let icon = document.getElementById("weather").getElementsByTagName("img")[0];
+	let icon = document.getElementById("weather").getElementsByTagName("i")[0];
 	let temp = document.getElementById("temp");
 	let tempTooltip = document.getElementById("temp-tooltip");
 	let city = document.getElementById("city");
@@ -21,9 +21,8 @@ window.onload = function() {
 		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
 		req.onload = function() {
 			if (req.status === 200) {
-				let weatherData = JSON.parse(this.response).data[0];
-				icon.src = "img/icons/" + weatherData.weather.icon + ".png";
-				icon.alt = weatherData.weather.description; 
+				let weatherData = JSON.parse(this.response).data[0];	
+				icon.className = "wi " + iconMap[weatherData.weather.icon];
 				temp.innerHTML = ((weatherData.temp * 9/5) + 32).toFixed(0) + "&deg";
 				tempTooltip.innerHTML = weatherData.weather.description;
 				city.innerHTML = weatherData.city_name

@@ -1,8 +1,9 @@
 body {
-	font-family: "Roboto", sans-serif;
-	--white: #fff;
+	background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Roboto', sans-serif;
+	--white: rgba(255, 255, 255, 1);
 	color: var(--white);
-	background-color: slategray;
 }
 
 .flex {
@@ -12,7 +13,27 @@ body {
 	flex-direction: row;
 }
 
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 3fr 3fr 1fr;
+}
+
+/*-----Links Styling-----*/
+#links a {
+	text-decoration: none;
+	transition: 0.25s ease all;
+	color:rgba(255,255,255,.85);
+}
+
+#links a:hover {
+	color: rgba(255, 255, 255, 1);
+}
+
+/*-----Weather Styling-----*/
 #weather {
+	justify-self: end;
+	grid-column: 3;
 	flex-direction: column;
 	align-items: flex-end;
 	margin: 10px;
@@ -39,7 +60,7 @@ body {
 }
 
 #city-tooltip {
-	top: 65px;
+	top: 70px;
 	right: 0px;
 }
 
@@ -59,4 +80,66 @@ body {
 #weather div:hover .tooltip {
 	visibility: visible;
 	opacity: 1;
+}
+
+/*-----Greeting Styling-----*/
+#greeting {
+	grid-column: 1 / 4;
+	justify-self: center;
+	align-self: end;
+	border: 1px solid black;
+}
+
+.time {
+	font-size: 5em;
+	text-align: center;
+	margin: 0;
+}
+
+.welcome {
+	font-size: 2em;
+	text-align: center;
+}
+
+/*-----Main Focus Styling-----*/
+#mainFocus {
+	grid-column: 1 / 4;
+	justify-self: center; 
+	align-self: start;
+}
+
+/*-----Photo Credit Styling-----*/
+#photoCredit {
+	align-self: end;
+}
+
+
+/*-----Quote Styling-----*/
+#quote {
+	align-self: end;
+}
+
+.quote {
+	text-align: center;
+}
+
+.quoteAuthor {
+	display: none;
+}
+
+
+/*-----Todo Styling-----*/
+#todo {
+	align-self: end;
+	justify-self: end;
+}
+
+#todo span {
+	transition: 0.25s ease all;
+	color:rgba(255,255,255,.85);
+}
+
+#todo span:hover {
+	color:rgba(255,255,255,1);
+	cursor: pointer;
 }

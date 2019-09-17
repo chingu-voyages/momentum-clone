@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
 
 <head>
@@ -6,12 +6,10 @@
   <title>Momentum Clone</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="apple-touch-icon" href="icon.png">
-
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/weather-icons.css"/>
   <meta name="theme-color" content="#fafafa">
 </head>
 
@@ -20,30 +18,38 @@
       <section id="links">
         <a href="#">Links</a>
       </section>
-      <section id="weather">
-        <h3>34</h3>
-        <h5>New York</h5>
+      <section id="weather" class="flex">
+        <div class="flex">
+          <i></i>
+          <span id="temp"></span>
+          <span id="temp-tooltip" class="tooltip"></span>
+        </div>
+        <div class="flex">
+          <span id="city"></span>
+          <span id="city-tooltip" class="tooltip"></span>
+        </div>
       </section>
       <section id="greeting">
         <p class="time">9:12</p>
         <span class="welcome">Good Morning, User</span>
       </section>
-      <section id="mainFocus">
+      <section id="main-focus">
         <h1>What would you like to do today?</h1>
         <input type="text">
       </section>
-      <section id="photoCredit">
+      <section id="photo-credit">
         <span>Photo by Will Li on <a href="https://unsplash.com/photos/LNrLkNcCXFc">Unsplash</a></span>
       </section>
       <section id="quote">
         <p class="quote">Together we can change the world, just one random act of kindness at a time.</p>
-        <p class="quoteAuthor">~Ron Hall</p>
+        <p class="quote-author">~Ron Hall</p>
       </section>
       <section id="todo">
         <span>Todo</span>
       </section>
   </main>
-  
+  <script src="js/config.js"></script>
+  <script src="js/iconMap.js"></script>
   <script src="js/main.js"></script>
 </body>
 

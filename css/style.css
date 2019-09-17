@@ -1,91 +1,146 @@
 body {
-    background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Roboto', sans-serif;
-    color:rgba(255, 255, 255, 1);
+	--white: rgba(255, 255, 255, 1);
+	--white-gray: rgba(255, 255, 255, 0.85);
+	background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Roboto', sans-serif;
+	color: var(--white);
+}
+
+.flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
 }
 
 main {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 3fr 3fr 1fr;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 3fr 3fr 1fr;
 }
 
 /*-----Links Styling-----*/
 #links a {
-    text-decoration: none;
-    transition: 0.25s ease all;
-    color:rgba(255,255,255,.85);
+	text-decoration: none;
+	transition: 0.25s ease all;
+	color: var(--white-gray);
 }
 
 #links a:hover {
-    color: rgba(255, 255, 255, 1);
+	color: var(--white);
 }
 
 /*-----Weather Styling-----*/
 #weather {
-    justify-self: end;
-    grid-column: 3;
+	justify-self: end;
+	grid-column: 3;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 10px;
+	cursor: pointer;
 }
 
-/*-----GReeting Styling-----*/
+#weather i {
+	font-size: 23px;
+	margin-right: 4px;
+}
+
+#temp {
+	font-size: 24px;
+}
+
+#temp-tooltip {
+	top: 52px;
+	right: 6px;
+}
+
+#city {
+	margin-top: 1px;
+	font-size: 13px;
+}
+
+#city-tooltip {
+	top: 70px;
+	right: 0px;
+}
+
+.tooltip {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	font-size: 12px;
+	--darkgray: #343b42;
+	color: var(--darkgray);
+	background-color: var(--white);
+	padding: 2px 5px;
+	border: 1px solid var(--darkgray);
+	transition: opacity 0.5s;
+}
+
+#weather div:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+}
+
+/*-----Greeting Styling-----*/
 #greeting {
-    grid-column: 1 / 4;
-    justify-self: center;
-    align-self: end;
-    border: 1px solid black;
+	grid-column: 1 / 4;
+	justify-self: center;
+	align-self: end;
+	border: 1px solid black;
 }
 
 .time {
-    font-size: 5em;
-    text-align: center;
-    margin: 0;
+	font-size: 5em;
+	text-align: center;
+	margin: 0;
 }
 
 .welcome {
-    font-size: 2em;
-    text-align: center;
+	font-size: 2em;
+	text-align: center;
 }
 
 /*-----Main Focus Styling-----*/
-#mainFocus {
-    grid-column: 1 / 4;
-    justify-self: center; 
-    align-self: start;
+#main-focus {
+	grid-column: 1 / 4;
+	justify-self: center; 
+	align-self: start;
 }
 
 /*-----Photo Credit Styling-----*/
-#photoCredit {
-    align-self: end;
+#photo-credit {
+	align-self: end;
 }
 
 
 /*-----Quote Styling-----*/
 #quote {
-    align-self: end;
+	align-self: end;
 }
 
 .quote {
-    text-align: center;
+	text-align: center;
 }
 
-.quoteAuthor {
-    display: none;
+.quote-author {
+	display: none;
 }
 
 
 /*-----Todo Styling-----*/
 #todo {
-    align-self: end;
-    justify-self: end;
+	align-self: end;
+	justify-self: end;
 }
 
 #todo span {
-    transition: 0.25s ease all;
-    color:rgba(255,255,255,.85);
+	transition: 0.25s ease all;
+	color: var(--white-gray);
 }
 
 #todo span:hover {
-    color:rgba(255,255,255,1);
-    cursor: pointer;
+	color: var(--white);
+	cursor: pointer;
 }

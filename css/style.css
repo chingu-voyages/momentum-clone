@@ -20,12 +20,12 @@ body {
 }
 
 #weather i {
-	font-size: 25px;
-	margin-right: 5px;
+	font-size: 23px;
+	margin-right: 4px;
 }
 
 #temp {
-	font-size: 25px;
+	font-size: 24px;
 }
 
 #temp-tooltip {
@@ -34,6 +34,7 @@ body {
 }
 
 #city {
+	margin-top: 1px;
 	font-size: 13px;
 }
 

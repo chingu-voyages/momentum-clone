@@ -1,8 +1,9 @@
 body {
+	--white: rgba(255, 255, 255, 1);
+	--white-gray: rgba(255, 255, 255, 0.85);
 	background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
 	background-size: cover;
 	font-family: 'Roboto', sans-serif;
-	--white: rgba(255, 255, 255, 1);
 	color: var(--white);
 }
 
@@ -23,11 +24,11 @@ main {
 #links a {
 	text-decoration: none;
 	transition: 0.25s ease all;
-	color:rgba(255,255,255,.85);
+	color: var(--white-gray);
 }
 
 #links a:hover {
-	color: rgba(255, 255, 255, 1);
+	color: var(--white);
 }
 
 /*-----Weather Styling-----*/
@@ -102,14 +103,14 @@ main {
 }
 
 /*-----Main Focus Styling-----*/
-#mainFocus {
+#main-focus {
 	grid-column: 1 / 4;
 	justify-self: center; 
 	align-self: start;
 }
 
 /*-----Photo Credit Styling-----*/
-#photoCredit {
+#photo-credit {
 	align-self: end;
 }
 
@@ -123,7 +124,7 @@ main {
 	text-align: center;
 }
 
-.quoteAuthor {
+.quote-author {
 	display: none;
 }
 
@@ -136,10 +137,10 @@ main {
 
 #todo span {
 	transition: 0.25s ease all;
-	color:rgba(255,255,255,.85);
+	color: var(--white-gray);
 }
 
 #todo span:hover {
-	color:rgba(255,255,255,1);
+	color: var(--white);
 	cursor: pointer;
 }

@@ -1,12 +1,16 @@
 window.onload = function() {
 	//Update clock time
-	let time = new Date();
-	let hours = time.getHours();
-	hours = (hours === 0) ? 12 : (hours > 12) ? hours - 12 : hours;
-	let minutes = time.getMinutes();
-	minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
-	document.getElementById("greeting").getElementsByTagName("p")[0].innerHTML = hours + ":" + minutes;
-	
+	let updateClock = function() {
+		let time = new Date();
+		let hours = time.getHours();
+		hours = (hours === 0) ? 12 : (hours > 12) ? hours - 12 : hours;
+		let minutes = time.getMinutes();
+		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
+		document.getElementById("greeting").getElementsByTagName("p")[0].innerHTML = hours + ":" + minutes;
+	};
+	updateClock();
+	setInterval(updateClock, 500);
+
 	//Fetch current weather and update weather module
 	let icon = document.getElementById("weather").getElementsByTagName("i")[0];
 	let temp = document.getElementById("temp");

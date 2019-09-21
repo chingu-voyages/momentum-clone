@@ -12,7 +12,7 @@ body {
 main {
 	display: grid;
 	height: 100vh;
-	padding: 10px;
+	padding: 20px;
 	box-sizing: border-box;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 3fr 3fr 1fr;
@@ -94,17 +94,17 @@ main {
 	grid-column: 1 / 4;
 	justify-self: center;
 	align-self: end;
+	margin-top: 25vh;
 }
 
 .time {
-	font-size: 8em;
+	font-size: 10.5em;
 	text-align: center;
-	margin: 0;
-	height: 135px;
+	margin: -25px 0;
 }
 
 .welcome {
-	font-size: 2.7em;
+	font-size: 3.5em;
 	text-align: center;
 }
 
@@ -126,6 +126,48 @@ main {
 	outline: none;
 	border-bottom: 3px white solid;
 	margin-top: 12px;
+}
+
+@media only screen and (max-height: 700px) {
+	.time {
+		font-size: 10em;
+	}
+	.welcome {
+		font-size: 3.2em;
+	}
+}
+
+@media only screen and (max-height: 650px) {
+	.time {
+		font-size: 9em;
+	}	
+	.welcome {
+		font-size: 2.8em;
+	}
+}
+
+@media only screen and (max-height: 600px) {
+	.time {
+		font-size: 8.5em;
+	}	
+	.welcome {
+		font-size: 2.7em;
+	}
+}
+
+@media only screen and (max-height: 550px) {
+	.time {
+		font-size: 7.5em;
+	}	
+	.welcome {
+		font-size: 2.4em;
+	}
+}
+
+@media only screen and (max-height: 400px) {
+	.time {
+		display: none;
+	}
 }
 
 /*-----Main Focus Styling-----*/

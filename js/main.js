@@ -14,24 +14,35 @@ window.onload = function() {
 			if (userInput.value) {
 				userName = userInput.value;
 				updateClock();
-				prompt.style.display = "none";
-				content.style.visibility = "visible";
+				prompt.style.opacity = "0";
+				setTimeout(() => {
+					prompt.style.display = "none";
+					content.style.opacity = "0";
+				}, 1000);
+				setTimeout(() => {
+					content.style.visibility = "visible";
+					content.style.opacity = "1";
+				}, 1500)
 			}
 		}
 	});
 
-	//Update clock time and greeting based on time
+	//Update clock time and update greeting based on hour
 	let clock = document.getElementsByClassName("time")[0];
 	let welcome = document.getElementsByClassName("welcome")[0]
 
 	let updateClock = function() {
 		let time = new Date();
 		let hours = time.getHours();
+		let partOfDay = (hours >= 5 && hours < 12) ? "morning" : 
+						(hours >= 12 && hours < 17) ? "afternoon" :
+						(hours >= 17 && hours < 21) ? "evening" :
+						(hours >= 21 || hours < 5) ? "night" : "day";
 		hours = (hours === 0) ? 12 : (hours > 12) ? hours - 12 : hours;
 		let minutes = time.getMinutes();
 		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
 		clock.innerHTML = hours + ":" + minutes;
-		welcome.innerHTML = "Good morning, " + userName;
+		welcome.innerHTML = "Good " + partOfDay + ", " + userName;
 	};
 	setInterval(updateClock, 500);
 

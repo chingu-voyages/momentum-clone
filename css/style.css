@@ -16,6 +16,7 @@ main {
 	box-sizing: border-box;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 3fr 3fr 1fr;
+	transition: opacity 0.5s;
 }
 
 /*-----Links Styling-----*/
@@ -112,6 +113,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	font-size: 3.5em;
+	transition: opacity 1s;
 }
 
 .prompt input {

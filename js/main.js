@@ -1,14 +1,38 @@
 window.onload = function() {
-	//Update clock time
+	//Prompt user for name
+	let content = document.getElementsByTagName("main")[0];
+	let prompt = document.getElementsByClassName("prompt")[0];
+
+	content.style.visibility = "hidden";
+	prompt.style.visibility = "visible";
+
+	//Get and store user name input
+	let userName;
+	let userInput = prompt.getElementsByTagName("input")[0]
+	userInput.addEventListener("keyup", (e) => {
+		if (e.keyCode === 13) {
+			if (userInput.value) {
+				userName = userInput.value;
+				updateClock();
+				prompt.style.display = "none";
+				content.style.visibility = "visible";
+			}
+		}
+	});
+
+	//Update clock time and greeting based on time
+	let clock = document.getElementsByClassName("time")[0];
+	let welcome = document.getElementsByClassName("welcome")[0]
+
 	let updateClock = function() {
 		let time = new Date();
 		let hours = time.getHours();
 		hours = (hours === 0) ? 12 : (hours > 12) ? hours - 12 : hours;
 		let minutes = time.getMinutes();
 		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
-		document.getElementById("greeting").getElementsByTagName("p")[0].innerHTML = hours + ":" + minutes;
+		clock.innerHTML = hours + ":" + minutes;
+		welcome.innerHTML = "Good morning, " + userName;
 	};
-	updateClock();
 	setInterval(updateClock, 500);
 
 	//Fetch current weather and update weather module

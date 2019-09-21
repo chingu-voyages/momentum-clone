@@ -107,6 +107,25 @@ main {
 	text-align: center;
 }
 
+.prompt {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 3.5em;
+}
+
+.prompt input {
+	width: 90%;
+	text-align: center;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	outline: none;
+	border-bottom: 3px white solid;
+	margin-top: 12px;
+}
+
 /*-----Main Focus Styling-----*/
 #main-focus {
 	grid-column: 1 / 4;

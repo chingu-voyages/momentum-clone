@@ -5,6 +5,10 @@ window.onload = function() {
 
 	content.style.visibility = "hidden";
 	prompt.style.visibility = "visible";
+	setTimeout(() => {
+		prompt.style.opacity = "1";
+	}, 500);
+
 
 	//Get and store user name input
 	let userName;

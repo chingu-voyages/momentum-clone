@@ -62,13 +62,16 @@ window.onload = function() {
 	})
 
 	//Keep search bar visible if there is user-inputted text (including just spaces) in it
-	let searchIcon = document.getElementsByClassName("search")[0].getElementsByTagName("i")[0];
+	let searchIcon = document.getElementsByClassName("fa-search")[0];
+	let googleIcon = document.getElementsByClassName("fa-google")[0];
 	search.addEventListener("focusout", (e) => {
 		if (search.value) {
 			search.style.opacity = "1";
+			googleIcon.style.opacity = "1";
 			searchIcon.style.color = "rgba(255, 255, 255, 1)";
 		} else {
 			search.style.opacity = "";
+			googleIcon.style.opacity = "";
 			searchIcon.style.color = "";
 		}
 	})

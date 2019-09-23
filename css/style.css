@@ -51,7 +51,7 @@ input {
 	color: var(--white);
 }
 
-.search i {
+.fa-search {
 	position: absolute;
 	left: 75px;
 	font-size: 95%;
@@ -59,11 +59,21 @@ input {
 	z-index: 1;
 }
 
-.search:hover i {
+.fa-google {
+	position: absolute;
+	left: 287px;
+	font-size: 86%;
+	padding-top: 3px;
+	opacity: 0;
+	visibility: "hidden";
 	color: var(--white);
 }
 
-.search input:focus + i {
+.search:hover .fa-search {
+	color: var(--white);
+}
+
+.search input:focus + .fa-search {
 	color: var(--white);
 }
 
@@ -79,12 +89,12 @@ input {
 	z-index: 2;
 }
 
-.search:hover input {
+.search:hover input, .search:hover input ~ .fa-google {
 	visibility: "visible";
 	opacity: 0.5;
 }
 
-.search input:focus {
+.search input:focus, .search input:focus ~ .fa-google {
 	opacity: 1;
 }
 

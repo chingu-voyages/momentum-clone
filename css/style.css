@@ -32,6 +32,8 @@ input {
 /*-----Web Styling-----*/
 #web {
 	display: flex;
+	height: 30px;
+	width: 300px;
 }
 
 .focus {
@@ -65,7 +67,6 @@ input {
 	font-size: 86%;
 	padding-top: 3px;
 	opacity: 0;
-	visibility: "hidden";
 	color: var(--white);
 }
 
@@ -79,7 +80,6 @@ input {
 
 .search input {
 	position: relative;
-	visibility: "hidden";
 	opacity: 0;
 	width: 180px;
 	padding: 0 27px 8px 27px;
@@ -90,7 +90,6 @@ input {
 }
 
 .search:hover input, .search:hover input ~ .fa-google {
-	visibility: "visible";
 	opacity: 0.5;
 }
 

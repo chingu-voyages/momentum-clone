@@ -9,19 +9,19 @@ window.onload = function() {
 		prompt.style.opacity = "1";
 	}, 500);
 
-
 	//Get and store user name input
 	let userName;
 	let userInput = prompt.getElementsByTagName("input")[0]
 	userInput.addEventListener("keyup", (e) => {
 		if (e.keyCode === 13) {
-			if (userInput.value) {
+			if (userInput.value.replace(/\s/g, "").length) {
 				userName = userInput.value;
 				updateClock();
 				prompt.style.opacity = "0";
 				setTimeout(() => {
 					prompt.style.display = "none";
 					content.style.opacity = "0";
+					userInput.value = "";
 				}, 1000);
 				setTimeout(() => {
 					content.style.visibility = "visible";
@@ -49,6 +49,32 @@ window.onload = function() {
 		welcome.innerHTML = "Good " + partOfDay + ", " + userName;
 	};
 	setInterval(updateClock, 500);
+
+	//Translate user search bar input into valid Google search query
+	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
+	search.addEventListener("keyup", (e) => {
+		if (e.keyCode === 13) {
+			if (search.value.replace(/\s/g, "").length) {
+				location.href = "https://www.google.com/search?q=" + search.value;
+				search.value = "";
+			}
+		}
+	})
+
+	//Keep search bar visible if there is user-inputted text (including just spaces) in it
+	let searchIcon = document.getElementsByClassName("fa-search")[0];
+	let googleIcon = document.getElementsByClassName("fa-google")[0];
+	search.addEventListener("focusout", (e) => {
+		if (search.value) {
+			search.style.opacity = "1";
+			googleIcon.style.opacity = "1";
+			searchIcon.style.color = "rgba(255, 255, 255, 1)";
+		} else {
+			search.style.opacity = "";
+			googleIcon.style.opacity = "";
+			searchIcon.style.color = "";
+		}
+	})
 
 	//Fetch current weather and update weather module
 	let icon = document.getElementById("weather").getElementsByTagName("i")[0];

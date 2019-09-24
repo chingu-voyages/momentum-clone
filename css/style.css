@@ -20,15 +20,81 @@ main {
 	transition: opacity 0.5s;
 }
 
-/*-----Links Styling-----*/
-#links a {
-	text-decoration: none;
-	transition: 0.25s ease all;
-	color: var(--white-gray);
+input {
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	outline: none;
+	border-bottom: 2px white solid;
 }
 
-#links a:hover {
+/*-----Web Styling-----*/
+#web {
+	display: flex;
+	height: 30px;
+	width: 300px;
+}
+
+.focus {
+	transition: 0.25s ease all;
+	color: var(--white-gray);	
+}
+
+.links {
+	margin-right: 15px;
+}
+
+.links a {
+	text-decoration: none;
+}
+
+.links a:hover {
 	color: var(--white);
+}
+
+.fa-search {
+	position: absolute;
+	left: 75px;
+	font-size: 95%;
+	padding-top: 2px;
+	z-index: 1;
+}
+
+.fa-google {
+	position: absolute;
+	left: 287px;
+	font-size: 86%;
+	padding-top: 3px;
+	opacity: 0;
+	color: var(--white);
+}
+
+.search:hover .fa-search {
+	color: var(--white);
+}
+
+.search input:focus + .fa-search {
+	color: var(--white);
+}
+
+.search input {
+	position: relative;
+	opacity: 0;
+	width: 180px;
+	padding: 0 27px 8px 27px;
+	color: var(--white);
+	cursor: pointer;
+	font-size: 95%;
+	z-index: 2;
+}
+
+.search:hover input, .search:hover input ~ .fa-google {
+	opacity: 0.5;
+}
+
+.search input:focus, .search input:focus ~ .fa-google {
+	opacity: 1;
 }
 
 /*-----Weather Styling-----*/
@@ -122,13 +188,8 @@ main {
 .prompt input {
 	width: 90%;
 	text-align: center;
-	font-size: inherit;
-	color: inherit;
-	background: none;
-	border: none;
-	outline: none;
-	border-bottom: 3px white solid;
 	margin-top: 12px;
+	border-bottom-width: 3px;
 }
 
 @media only screen and (max-height: 700px) {

@@ -1,14 +1,53 @@
 window.onload = function() {
-	//Update clock time
+	//Prompt user for name
+	let content = document.getElementsByTagName("main")[0];
+	let prompt = document.getElementsByClassName("prompt")[0];
+
+	content.style.visibility = "hidden";
+	prompt.style.visibility = "visible";
+	setTimeout(() => {
+		prompt.style.opacity = "1";
+	}, 500);
+
+
+	//Get and store user name input
+	let userName;
+	let userInput = prompt.getElementsByTagName("input")[0]
+	userInput.addEventListener("keyup", (e) => {
+		if (e.keyCode === 13) {
+			if (userInput.value) {
+				userName = userInput.value;
+				updateClock();
+				prompt.style.opacity = "0";
+				setTimeout(() => {
+					prompt.style.display = "none";
+					content.style.opacity = "0";
+				}, 1000);
+				setTimeout(() => {
+					content.style.visibility = "visible";
+					content.style.opacity = "1";
+				}, 1500)
+			}
+		}
+	});
+
+	//Update clock time and update greeting based on hour
+	let clock = document.getElementsByClassName("time")[0];
+	let welcome = document.getElementsByClassName("welcome")[0]
+
 	let updateClock = function() {
 		let time = new Date();
 		let hours = time.getHours();
+		let partOfDay = (hours >= 5 && hours < 12) ? "morning" : 
+						(hours >= 12 && hours < 17) ? "afternoon" :
+						(hours >= 17 && hours < 21) ? "evening" :
+						(hours >= 21 || hours < 5) ? "night" : "day";
 		hours = (hours === 0) ? 12 : (hours > 12) ? hours - 12 : hours;
 		let minutes = time.getMinutes();
 		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
-		document.getElementById("greeting").getElementsByTagName("p")[0].innerHTML = hours + ":" + minutes;
+		clock.innerHTML = hours + ":" + minutes;
+		welcome.innerHTML = "Good " + partOfDay + ", " + userName;
 	};
-	updateClock();
 	setInterval(updateClock, 500);
 
 	//Fetch current weather and update weather module

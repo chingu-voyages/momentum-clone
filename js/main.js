@@ -110,4 +110,72 @@ window.onload = function() {
 		}
 		req.send();
 	}
+
+	//Implement to do list transitions
+	let todoSection = document.getElementById("todo");
+	let todoToggle = todoSection.getElementsByClassName("focus")[0];
+	let todoBox = todoSection.getElementsByClassName("popup")[0];
+	let todoStart = todoBox.getElementsByTagName("div")[0];
+	let todoNew = todoStart.getElementsByTagName("button")[0];
+	let todoInput = todoSection.getElementsByTagName("input")[0];
+	let todoList = todoBox.getElementsByTagName("ul")[0];
+
+	//Toggle to do list popup
+	todoBox.style.visibility = "hidden";
+	todoToggle.addEventListener("click", (e) => {
+		if (todoBox.style.visibility === "hidden") {
+			todoBox.style.visibility = "visible";
+			todoToggle.style.color = "rgba(255, 255, 255, 1)";
+			if (todoList.childElementCount) {
+				todoList.style.visibility = "visible";
+				todoInput.style.visibility = "visible";
+				todoStart.style.visibility = "hidden";
+			} else {
+				todoNew.style.visibility = "visible";
+				todoNew.style.opacity = "1";
+				todoInput.style.visibility = "hidden";
+			}
+		} else {
+			[todoBox, todoNew, todoInput, todoList].forEach((element) => element.style.visibility = "hidden");
+			todoToggle.style.color = "";
+		}
+	});	
+
+	//Make input for adding new task appear
+	todoInput.style.visibility = "hidden";
+	todoNew.addEventListener("click", (e) => {
+		todoNew.style.opacity = "0"
+		setTimeout(() => {
+			todoNew.style.visibility = "hidden";
+		}, 200)
+		todoInput.style.visibility = "visible";
+	})
+
+	//Add task and switch view to task list
+	todoList.style.visibility = "hidden";
+	todoInput.addEventListener("keyup", (e) => {
+		if (!todoInput.value.replace(/\s/g, "").length) {
+			todoInput.value = "";
+		}
+		if (e.keyCode === 13) {
+			if (todoInput.value) {
+				let task = document.createElement("li");
+				let check = document.createElement("input");
+				check.type = "checkbox";
+				let taskInput = document.createElement("span");
+				taskInput.innerHTML = todoInput.value.trim();
+				task.appendChild(check);
+				task.appendChild(taskInput);
+				todoList.appendChild(task);
+				todoList.scrollTop = todoList.scrollHeight;
+				todoInput.value = "";
+				if (todoList.style.visibility === "hidden") {
+					todoList.style.visibility = "visible";
+					todoStart.style.display = "none";
+					todoInput.style.paddingRight = "20px";
+					todoBox.style.paddingRight = "3px";
+				}
+			}
+		}
+	})
 }

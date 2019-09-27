@@ -342,7 +342,6 @@ button {
 	margin-left: 3px;
 	margin-right: 9px;
 	font-size: 95%;
-	height: 18.4px;
 }
 
 #todo li input:checked + span {
@@ -360,6 +359,8 @@ button {
 	border-radius: 50%;
 	color: var(--medium-gray);
 	font-size: 72%;
+	padding-right: 17px;
+	padding-top: 2px;
 	opacity: 0;
 }
 

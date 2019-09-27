@@ -13,21 +13,19 @@ window.onload = function() {
 	let userName;
 	let userInput = prompt.getElementsByTagName("input")[0]
 	userInput.addEventListener("keyup", (e) => {
-		if (e.keyCode === 13) {
-			if (userInput.value.replace(/\s/g, "").length) {
-				userName = userInput.value;
-				updateClock();
-				prompt.style.opacity = "0";
-				setTimeout(() => {
-					prompt.style.display = "none";
-					content.style.opacity = "0";
-					userInput.value = "";
-				}, 1000);
-				setTimeout(() => {
-					content.style.visibility = "visible";
-					content.style.opacity = "1";
-				}, 1500)
-			}
+		if (e.keyCode === 13 && hasContent(userInput)) {
+			userName = userInput.value;
+			updateClock();
+			prompt.style.opacity = "0";
+			setTimeout(() => {
+				prompt.style.display = "none";
+				content.style.opacity = "0";
+				userInput.value = "";
+			}, 1000);
+			setTimeout(() => {
+				content.style.visibility = "visible";
+				content.style.opacity = "1";
+			}, 1500)
 		}
 	});
 
@@ -53,11 +51,9 @@ window.onload = function() {
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
 	search.addEventListener("keyup", (e) => {
-		if (e.keyCode === 13) {
-			if (search.value.replace(/\s/g, "").length) {
-				location.href = "https://www.google.com/search?q=" + search.value;
-				search.value = "";
-			}
+		if (e.keyCode === 13 && hasContent(search)) {
+			location.href = "https://www.google.com/search?q=" + search.value;
+			search.value = "";
 		}
 	})
 
@@ -154,7 +150,7 @@ window.onload = function() {
 	//Add task and switch view to task list
 	todoList.style.visibility = "hidden";
 	todoInput.addEventListener("keyup", (e) => {
-		if (!todoInput.value.replace(/\s/g, "").length) {
+		if (!hasContent(todoInput)) {
 			todoInput.value = "";
 		}
 		if (e.keyCode === 13) {
@@ -206,13 +202,12 @@ window.onload = function() {
 		window.addEventListener("click", (e) => {
 			if (toggle.contains(e.target)) {
 				menu.style.display = (menu.style.display === "none") ? "flex" : "none";
-				toggle.style.opacity= (menu.style.display === "none") ? "" : "1";
-				let getComputed = (node) => parseFloat(window.getComputedStyle(node, null).getPropertyValue("height").replace("px", ""));
-				listHeight = getComputed(list);
-				menuHeight = getComputed(menu);
-				taskHeight = getComputed(task);
-				if (listHeight < menuHeight || (ind === list.childElementCount - 1 && taskHeight <= menuHeight)) {
-					listHeight += menuHeight - taskHeight;
+				toggle.style.opacity= (menu.style.display === "none") ? "" : "1"; 
+				listHeight = parseFloat(window.getComputedStyle(list, null).getPropertyValue("height").replace("px", ""));
+				listEnd = list.getBoundingClientRect().bottom;
+				menuEnd = menu.getBoundingClientRect().bottom;
+				if (menuEnd > listEnd) {
+					listHeight += menuEnd - listEnd;
 				}
 				list.style.height = (menu.style.display === "none") ? "" : listHeight + "px";
 			} else {
@@ -229,6 +224,7 @@ window.onload = function() {
 		let taskEditor = task.getElementsByTagName("input")[1];
 		taskEditor.value = taskInput.innerHTML;
 		
+		//Implement edit
 		edit.innerHTML = "Edit";
 		edit.style.borderBottom = "1px solid var(--medium-gray)"
 		edit.addEventListener("mouseover", (e) => {
@@ -247,21 +243,33 @@ window.onload = function() {
 		})
 		window.addEventListener("click", (e) => {
 			if (!taskEditor.contains(e.target) && !edit.contains(e.target)) {
-				taskInput.innerHTML = taskEditor.value;
+				if (hasContent(taskEditor)) {
+					taskInput.innerHTML = taskEditor.value;
+				}
 				taskEditor.style.display = "none";
-				taskInput.style.display = "";
+				taskInput.style.display = "";					
 			}
 		})
 		taskEditor.addEventListener("keyup", (e) => {
-			if (e.keyCode === 13 && taskEditor.value.replace(/\s/g, "").length) {
+			if (e.keyCode === 13 && hasContent(taskEditor)) {
 				taskInput.innerHTML = taskEditor.value;
 				taskEditor.style.display = "none";
 				taskInput.style.display = "";	
 			}
 		})
+
+		//Implement delete
 		del.innerHTML = "Delete";
 		del.addEventListener("mouseover", (e) => {
 			del.style.borderRadius = "0px 0px 5px 5px";
 		});
+		del.addEventListener("click", (e) => {
+			task.remove();
+		})
+	}
+
+	//Check that the content of an input isn't only whitespace
+	let hasContent = function(input) {
+		return input.value.replace(/\s/g, "").length;
 	}
 }

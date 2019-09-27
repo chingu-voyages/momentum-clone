@@ -1,7 +1,10 @@
 body {
 	--white: rgba(255, 255, 255, 1);
-	--white-gray: rgba(255, 255, 255, 0.85);
-	--dark-gray: #343b42;
+	--light-gray: rgba(255, 255, 255, 0.85);
+	--medium-gray: rgba(255, 255, 255, 0.5);
+	--dark-gray: rgba(255, 255, 255, 0.3);
+	--blue-gray: rgba(52, 59, 66, 1);
+	--black-gray: rgba(0, 0, 0, 0.85);
 	background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
 	background-size: cover;
 	font-family: 'Roboto', sans-serif;
@@ -22,11 +25,36 @@ main {
 
 input {
 	font-size: inherit;
+	font-family: inherit;
 	color: inherit;
 	background: none;
 	border: none;
 	outline: none;
 	border-bottom: 2px white solid;
+}
+
+button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+.popup {
+	background-color: var(--black-gray);
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding: 15px 20px;
+}
+
+.popup::after {
+	content: "";
+	height: 0;
+	width: 0;
+	border: 10px solid transparent;
+	border-top: 10px solid var(--black-gray);
+	position: absolute;
+	bottom: -20px;
+	right: 25px;
 }
 
 /*-----Web Styling-----*/
@@ -38,7 +66,7 @@ input {
 
 .focus {
 	transition: 0.25s ease all;
-	color: var(--white-gray);	
+	color: var(--light-gray);	
 }
 
 .links {
@@ -131,7 +159,7 @@ input {
 	align-items: flex-start;
 	cursor: pointer;
 	font-size: 13px;
-	color: var(--white-gray);
+	color: var(--light-gray);
 }
 
 .city-container .tooltip {
@@ -144,10 +172,10 @@ input {
 	opacity: 0;
 	position: absolute;
 	font-size: 12px;
-	color: var(--dark-gray);
+	color: var(--blue-gray);
 	background-color: var(--white);
 	padding: 2px 5px;
-	border: 1px solid var(--dark-gray);
+	border: 1px solid var(--blue-gray-gray);
 	transition: opacity 0.5s;
 }
 
@@ -267,12 +295,158 @@ input {
 	justify-self: end;
 }
 
-#todo span {
-	transition: 0.25s ease all;
-	color: var(--white-gray);
+#todo > button {
+	font-size: inherit;
+	padding: 0;
 }
 
-#todo span:hover {
+#todo > button:hover {
 	color: var(--white);
 	cursor: pointer;
+}
+
+#todo .popup {
+	position: absolute;
+	bottom: 60px;
+	right: 7px;
+	width: 320px;
+	max-height: 240px;
+	display: flex;
+	flex-direction: column;
+}
+
+#todo .popup > span {
+	font-size: 1.25em;
+}
+
+#todo ul {
+	list-style: none;
+	padding: 0;
+	margin: 6px 0px;
+	max-width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#todo li {
+	display: flex;
+	flex-direction: row;
+	padding: 3px 0px;
+	position: relative;
+}
+
+#todo li span, #todo li span + input {
+	width: 75%;
+	word-wrap: break-word;
+	padding: 0px 0px 0px 5px;
+	margin-left: 3px;
+	margin-right: 9px;
+	font-size: 95%;
+}
+
+#todo li input:checked + span {
+	text-decoration: line-through;
+	color: var(--medium-gray);
+}
+
+#todo li > button {
+	position: absolute;
+	left: 255px;
+	top: 1.5px;
+	cursor: pointer;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	color: var(--medium-gray);
+	font-size: 72%;
+	padding-right: 17px;
+	padding-top: 2px;
+	opacity: 0;
+}
+
+#todo li:hover > button {
+	opacity: 1;
+}
+
+#todo li > button:hover {
+	opacity: 1;
+	background-color: var(--dark-gray);
+	color: var(--light-gray);
+}
+
+#todo li > button:active {
+	background-color: var(--medium-gray);
+}
+
+#todo li div {
+	justify-content: flex-end;
+	position: absolute;
+	left: 183px;
+	background-color: rgb(64, 64, 64);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	z-index: 5;
+}
+
+#todo li div button {
+	width: 70px;
+	height: 25px;
+	color: inherit;
+	cursor: pointer;
+}
+
+#todo li div button:hover {
+	background-color: rgb(105, 105, 105);
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+	position: absolute;
+	right: 2px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--dark-gray);
+	border-radius: 50px;
+}
+
+#todo .popup > div {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#todo .popup > div p {
+	color: var(--light-gray);
+	font-size: 93%;
+}
+
+#todo .popup > div button {
+	background-color: var(--dark-gray);
+	color: var(--white);
+	border-radius: 25px;
+	padding: 8px 27px;
+	cursor: pointer;
+	margin-bottom: 47px;
+	transition: opacity 0.2s;
+}
+
+#todo .popup > div button:hover {
+	background-color: var(--medium-gray);
+}
+
+#todo input[type=text] {
+	font-size: 95%;
+	border-bottom: none;
+}
+
+#todo input[type=text]::placeholder {
+	color: var(--medium-gray);
 }

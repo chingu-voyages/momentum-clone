@@ -25,6 +25,7 @@ main {
 
 input {
 	font-size: inherit;
+	font-family: inherit;
 	color: inherit;
 	background: none;
 	border: none;
@@ -334,13 +335,14 @@ button {
 	position: relative;
 }
 
-#todo li span {
+#todo li span, #todo li span + input {
 	width: 75%;
 	word-wrap: break-word;
-	padding-left: 5px;
+	padding: 0px 0px 0px 5px;
 	margin-left: 3px;
 	margin-right: 9px;
 	font-size: 95%;
+	height: 18.4px;
 }
 
 #todo li input:checked + span {

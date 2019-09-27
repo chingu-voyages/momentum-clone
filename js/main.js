@@ -164,6 +164,9 @@ window.onload = function() {
 				check.type = "checkbox";
 				let taskInput = document.createElement("span");
 				taskInput.innerHTML = todoInput.value.trim();
+				let taskEditor = document.createElement("input");
+				taskEditor.type = "text";
+				taskEditor.style.display = "none";
 				let optionsIcon = document.createElement("i");
 				optionsIcon.className = "fa fa-ellipsis-h";
 				optionsButton = document.createElement("button");
@@ -173,6 +176,7 @@ window.onload = function() {
 
 				task.appendChild(check);
 				task.appendChild(taskInput);
+				task.appendChild(taskEditor);
 				task.appendChild(optionsButton);
 				task.appendChild(optionsContainer);
 				todoList.appendChild(task);
@@ -195,7 +199,7 @@ window.onload = function() {
 	let makeMenu = function(list, ind) {
 		let task = list.getElementsByTagName("li")[ind];
 		let buttons = task.getElementsByTagName("button");
-		editDelete(buttons[1], buttons[2]);
+		editDelete(buttons[1], buttons[2], task);
 		let toggle = buttons[0];
 		let menu = task.getElementsByTagName("div")[0];
 		menu.style.display = "none";
@@ -220,12 +224,41 @@ window.onload = function() {
 	}
 
 	//Implement edit and delete features
-	let editDelete = function(edit, del) {
+	let editDelete = function(edit, del, task) {
+		let taskInput = task.getElementsByTagName("span")[0];
+		let taskEditor = task.getElementsByTagName("input")[1];
+		taskEditor.value = taskInput.innerHTML;
+		
 		edit.innerHTML = "Edit";
 		edit.style.borderBottom = "1px solid var(--medium-gray)"
 		edit.addEventListener("mouseover", (e) => {
 			edit.style.borderRadius = "5px 5px 0px 0px";
 		});
+		taskEditor.addEventListener("focus", (e) => {
+			taskEditor.style.color = "rgba(255, 255, 255, 0.7)"
+		})
+		window.addEventListener("click", (e) => {
+			if (edit.contains(e.target)) {
+				taskInput.style.display = "none";
+				taskEditor.style.display = "block";
+				taskEditor.value = taskInput.innerHTML;
+				taskEditor.focus();				
+			}
+		})
+		window.addEventListener("click", (e) => {
+			if (!taskEditor.contains(e.target) && !edit.contains(e.target)) {
+				taskInput.innerHTML = taskEditor.value;
+				taskEditor.style.display = "none";
+				taskInput.style.display = "";
+			}
+		})
+		taskEditor.addEventListener("keyup", (e) => {
+			if (e.keyCode === 13 && taskEditor.value.replace(/\s/g, "").length) {
+				taskInput.innerHTML = taskEditor.value;
+				taskEditor.style.display = "none";
+				taskInput.style.display = "";	
+			}
+		})
 		del.innerHTML = "Delete";
 		del.addEventListener("mouseover", (e) => {
 			del.style.borderRadius = "0px 0px 5px 5px";

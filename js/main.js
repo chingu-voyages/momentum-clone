@@ -164,10 +164,22 @@ window.onload = function() {
 				check.type = "checkbox";
 				let taskInput = document.createElement("span");
 				taskInput.innerHTML = todoInput.value.trim();
+				let optionsIcon = document.createElement("i");
+				optionsIcon.className = "fa fa-ellipsis-h";
+				optionsButton = document.createElement("button");
+				optionsButton.appendChild(optionsIcon);
+				let optionsContainer = document.createElement("div");
+				[0, 1].forEach((i) => optionsContainer.appendChild(document.createElement("button")));
+
 				task.appendChild(check);
 				task.appendChild(taskInput);
+				task.appendChild(optionsButton);
+				task.appendChild(optionsContainer);
 				todoList.appendChild(task);
-				todoList.scrollTop = todoList.scrollHeight;
+
+				makeMenu(todoList, todoList.childElementCount - 1);
+
+				todoList.scrollTop = todoList.scrollHeight;				
 				todoInput.value = "";
 				if (todoList.style.visibility === "hidden") {
 					todoList.style.visibility = "visible";
@@ -178,4 +190,45 @@ window.onload = function() {
 			}
 		}
 	})
+
+	//Edit and remove to do list items
+	let makeMenu = function(list, ind) {
+		let task = list.getElementsByTagName("li")[ind];
+		let buttons = task.getElementsByTagName("button");
+		editDelete(buttons[1], buttons[2]);
+		let toggle = buttons[0];
+		let menu = task.getElementsByTagName("div")[0];
+		menu.style.display = "none";
+		window.addEventListener("click", (e) => {
+			if (toggle.contains(e.target)) {
+				menu.style.display = (menu.style.display === "none") ? "flex" : "none";
+				toggle.style.opacity= (menu.style.display === "none") ? "" : "1";
+				let getComputed = (node) => parseFloat(window.getComputedStyle(node, null).getPropertyValue("height").replace("px", ""));
+				listHeight = getComputed(list);
+				menuHeight = getComputed(menu);
+				taskHeight = getComputed(task);
+				if (listHeight < menuHeight || (ind === list.childElementCount - 1 && taskHeight <= menuHeight)) {
+					listHeight += menuHeight - taskHeight;
+				}
+				list.style.height = (menu.style.display === "none") ? "" : listHeight + "px";
+			} else {
+				menu.style.display = "none";
+				toggle.style.opacity = "";
+				list.style.height = "";
+			}
+		})
+	}
+
+	//Implement edit and delete features
+	let editDelete = function(edit, del) {
+		edit.innerHTML = "Edit";
+		edit.style.borderBottom = "1px solid var(--medium-gray)"
+		edit.addEventListener("mouseover", (e) => {
+			edit.style.borderRadius = "5px 5px 0px 0px";
+		});
+		del.innerHTML = "Delete";
+		del.addEventListener("mouseover", (e) => {
+			del.style.borderRadius = "0px 0px 5px 5px";
+		});
+	}
 }

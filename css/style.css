@@ -32,6 +32,12 @@ input {
 	border-bottom: 2px white solid;
 }
 
+button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
 .popup {
 	background-color: var(--black-gray);
 	border-radius: 5px;
@@ -289,9 +295,6 @@ input {
 }
 
 #todo > button {
-	outline: none;
-	border: none;
-	background-color: transparent;
 	font-size: inherit;
 	padding: 0;
 }
@@ -328,19 +331,70 @@ input {
 	display: flex;
 	flex-direction: row;
 	padding: 3px 0px;
+	position: relative;
 }
 
 #todo li span {
-	max-width: 75%;
+	width: 75%;
 	word-wrap: break-word;
 	padding-left: 5px;
 	margin-left: 3px;
+	margin-right: 9px;
 	font-size: 95%;
 }
 
 #todo li input:checked + span {
 	text-decoration: line-through;
 	color: var(--medium-gray);
+}
+
+#todo li > button {
+	position: absolute;
+	left: 255px;
+	top: 1.5px;
+	cursor: pointer;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	color: var(--medium-gray);
+	font-size: 72%;
+	opacity: 0;
+}
+
+#todo li:hover > button {
+	opacity: 1;
+}
+
+#todo li > button:hover {
+	opacity: 1;
+	background-color: var(--dark-gray);
+	color: var(--light-gray);
+}
+
+#todo li > button:active {
+	background-color: var(--medium-gray);
+}
+
+#todo li div {
+	justify-content: flex-end;
+	position: absolute;
+	left: 183px;
+	background-color: rgb(64, 64, 64);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	z-index: 5;
+}
+
+#todo li div button {
+	width: 70px;
+	height: 25px;
+	color: inherit;
+	cursor: pointer;
+}
+
+#todo li div button:hover {
+	background-color: rgb(105, 105, 105);
 }
 
 ::-webkit-scrollbar {
@@ -358,7 +412,7 @@ input {
 	border-radius: 50px;
 }
 
-#todo .popup div {
+#todo .popup > div {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -366,16 +420,14 @@ input {
 	justify-content: center;
 }
 
-#todo .popup div p {
+#todo .popup > div p {
 	color: var(--light-gray);
 	font-size: 93%;
 }
 
-#todo .popup div button {
+#todo .popup > div button {
 	background-color: var(--dark-gray);
 	color: var(--white);
-	outline: none;
-	border: none;
 	border-radius: 25px;
 	padding: 8px 27px;
 	cursor: pointer;
@@ -383,7 +435,7 @@ input {
 	transition: opacity 0.2s;
 }
 
-#todo .popup div button:hover {
+#todo .popup > div button:hover {
 	background-color: var(--medium-gray);
 }
 

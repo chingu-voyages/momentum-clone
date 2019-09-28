@@ -48,6 +48,26 @@ window.onload = function() {
 	};
 	setInterval(updateClock, 500);
 
+	//Implement main focus
+	let mainFocus = document.getElementById("main-focus");
+	let mainFocusHeader = mainFocus.getElementsByTagName("span")[0];
+	let mainFocusInput = mainFocus.getElementsByTagName("input")[0];
+	
+	//Prompt user to hit enter after 4 seconds
+	let instruction = mainFocus.getElementsByTagName("span")[1];
+	instruction.style.opacity = "0";
+	let showInstruction;
+	mainFocusInput.addEventListener("keyup", (e) => {
+		clearTimeout(showInstruction);
+		if (hasContent(mainFocusInput)) {
+			showInstruction = setTimeout(() => {
+				instruction.style.opacity = "1";
+			}, 4000);
+		} else {
+	instruction.style.opacity = "0";
+		};
+	});
+
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
 	search.addEventListener("keyup", (e) => {

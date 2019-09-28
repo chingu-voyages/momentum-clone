@@ -190,6 +190,9 @@ button {
 	justify-self: center;
 	align-self: end;
 	margin-top: 25vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .time {
@@ -267,6 +270,22 @@ button {
 	grid-column: 1 / 4;
 	justify-self: center; 
 	align-self: start;
+	font-size: 2.3em;
+	display: flex;
+	flex-direction: column;
+	margin-top: 65px;
+	align-items: center;
+}
+
+#main-focus input {
+	text-align: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+#main-focus input + span {
+    font-size: 0.5em;
+    transition: opacity 0.5s;
 }
 
 /*-----Photo Credit Styling-----*/

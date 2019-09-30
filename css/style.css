@@ -292,7 +292,8 @@ button {
 #main-focus .hint + span {
 	font-size: 65%;
 	font-weight: bold;
-	margin-bottom: 8px;
+	margin-bottom: 7.5px;
+    margin-top: 7px;
 }
 
 .focus-output {
@@ -372,6 +373,7 @@ button {
     width: 25px;
     height: 25px;
     padding-top: 2.3px;
+    transition: transform 0.5s;
 }
 
 .focus-output button:hover {

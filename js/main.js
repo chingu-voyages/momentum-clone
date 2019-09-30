@@ -74,6 +74,7 @@ window.onload = function() {
 		if (hasContent(focusInput)) {
 			if (e.keyCode === 13) {
 				focusTask.innerHTML = focusInput.value.trim();
+				focusInput.value = "";
 				focusInput.style.display = "none";
 				focusHeader.style.display = "none";
 				outputHeader.style.display = "block";
@@ -92,11 +93,12 @@ window.onload = function() {
 		};
 	});
 
-	//Implement transitions for main focus output
+	//Change style and congratulate user on checking off the main focus task
 	let congratsMessages = ["Good job!", "Nice.", "Way to go!", "Great work!"];
 	let showCongrats
-	focusCheck.getElementsByTagName("input")[0].addEventListener("change", (e) => {
-		if (focusCheck.getElementsByTagName("input")[0].checked) {
+	let focusCheckBox = focusCheck.getElementsByTagName("input")[0];
+	focusCheckBox.addEventListener("change", (e) => {
+		if (focusCheckBox.checked) {
 			focusTask.style.textDecoration = "line-through";
 			focusTask.style.color = "var(--light-gray)";	
 			[focusCheck, focusDelete].forEach((x) => x.style.opacity = "1");
@@ -106,15 +108,24 @@ window.onload = function() {
 			showCongrats = setTimeout(() => {
 				congrats.style.opacity = "0";
 			}, 3000);
-
+			//Turn x button into +
+			focusDelete.style.transform = "rotate(45deg)";
 		} else {
-			focusTask.style = "";
-			[focusCheck, focusDelete].forEach((x) => x.style.opacity = "");
+			[focusCheck, focusTask, focusDelete].forEach((x) => x.style = "");
 			clearTimeout(showCongrats);
 			congrats.style.opacity = "0";
+		};
+	});
 
-		}
-	})
+	//Delete main focus and allow user to input a new one
+	focusDelete.addEventListener("click", (e) => {
+		[outputHeader, focusOutput, congrats].forEach((x) => x.style.display = "none");
+		[focusInput, focusHeader].forEach((x) => x.style.display = "block");
+		[focusCheck, focusTask, focusDelete].forEach((x) => x.style = "");
+		clearTimeout(showCongrats);
+		congrats.style.opacity = "0";
+		focusCheckBox.checked = false;
+	});
 
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];

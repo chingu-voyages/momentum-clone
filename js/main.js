@@ -53,7 +53,9 @@ window.onload = function() {
 	let mainFocusHeader = mainFocus.getElementsByTagName("span")[0];
 	let mainFocusInput = mainFocus.getElementsByTagName("input")[0];
 	let mainFocusOutput = mainFocus.getElementsByTagName("div")[0];
-	mainFocusOutput.style.visibility = "hidden" ;
+	let outputHeader = mainFocus.getElementsByTagName("span")[2];
+	mainFocusOutput.style.display = "none" ;
+	outputHeader.style.display = "none";
 
 	let instruction = mainFocus.getElementsByTagName("span")[1];
 	instruction.style.opacity = "0";
@@ -65,10 +67,11 @@ window.onload = function() {
 			if (e.keyCode === 13) {
 				mainFocusOutput.getElementsByTagName("span")[1].innerHTML = mainFocusInput.value.trim();
 				mainFocusInput.style.display = "none";
-				mainFocusHeader.innerHTML = "TODAY";
-				mainFocusHeader.style.fontSize = "0.7em";
-				mainFocusOutput.style.visibility = "visible";
+				mainFocusHeader.style.display = "none";
+				outputHeader.style.display = "block";
+				mainFocusOutput.style.display = "flex";
 				instruction.style.opacity = "0";
+				instruction.style.display = "none";
 			} else {
 				//Prompt user to hit enter after 4 seconds
 				showInstruction = setTimeout(() => {

@@ -288,6 +288,18 @@ button {
     transition: opacity 0.5s;
 }
 
+.focus-output {
+	display: flex;
+	border: 1px solid white;
+	flex-direction: row;
+	align-items: center;
+}
+
+.focus-output span {
+	font-size: 1em;
+	margin: 0px 10px;
+}
+
 /*-----Photo Credit Styling-----*/
 #photo-credit {
 	align-self: end;

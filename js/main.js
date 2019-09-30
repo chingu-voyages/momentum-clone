@@ -52,19 +52,31 @@ window.onload = function() {
 	let mainFocus = document.getElementById("main-focus");
 	let mainFocusHeader = mainFocus.getElementsByTagName("span")[0];
 	let mainFocusInput = mainFocus.getElementsByTagName("input")[0];
-	
-	//Prompt user to hit enter after 4 seconds
+	let mainFocusOutput = mainFocus.getElementsByTagName("div")[0];
+	mainFocusOutput.style.visibility = "hidden" ;
+
 	let instruction = mainFocus.getElementsByTagName("span")[1];
 	instruction.style.opacity = "0";
 	let showInstruction;
+
 	mainFocusInput.addEventListener("keyup", (e) => {
 		clearTimeout(showInstruction);
 		if (hasContent(mainFocusInput)) {
-			showInstruction = setTimeout(() => {
-				instruction.style.opacity = "1";
-			}, 4000);
+			if (e.keyCode === 13) {
+				mainFocusOutput.getElementsByTagName("span")[1].innerHTML = mainFocusInput.value.trim();
+				mainFocusInput.style.display = "none";
+				mainFocusHeader.innerHTML = "TODAY";
+				mainFocusHeader.style.fontSize = "0.7em";
+				mainFocusOutput.style.visibility = "visible";
+				instruction.style.opacity = "0";
+			} else {
+				//Prompt user to hit enter after 4 seconds
+				showInstruction = setTimeout(() => {
+					instruction.style.opacity = "1";
+				}, 4000);
+			}
 		} else {
-	instruction.style.opacity = "0";
+			instruction.style.opacity = "0";
 		};
 	});
 

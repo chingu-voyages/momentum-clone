@@ -36,6 +36,7 @@ input {
 button {
 	outline: none;
 	border: none;
+	cursor: pointer;
 	background-color: transparent;
 }
 
@@ -283,12 +284,12 @@ button {
     margin-bottom: 12px;
 }
 
-#main-focus > input + span {
+#main-focus .hint {
     font-size: 0.5em;
     transition: opacity 0.5s;
 }
 
-#main-focus > input + span + span {
+#main-focus .hint + span {
 	font-size: 65%;
 	font-weight: bold;
 	margin-bottom: 8px;
@@ -299,9 +300,19 @@ button {
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 8px;
 }
 
-.focus-output div {
+.focus-hover {
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.focus-output:hover .focus-hover {
+	opacity: 1;
+}
+
+.focus-output label {
 	position: relative;
 	cursor: pointer;
 	height: 25px;
@@ -309,13 +320,13 @@ button {
 	margin-top: 7px;
 }
 
-.focus-output div input {
+.focus-output label input {
 	position: absolute;
 	height: 0;
 	width: 0;
 }
 
-.focus-output div span {
+.focus-output label span {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -327,7 +338,11 @@ button {
 	transition: border-color 0.25s;
 }
 
-.focus-output div:hover span {
+.focus-output label:hover span {
+	border-color: var(--white);
+}
+
+.focus-output label input:checked + span {
 	border-color: var(--white);
 }
 
@@ -337,17 +352,35 @@ button {
 	left: 5px;
 	color: var(--light-gray);
 	font-size: 0.6em;
+	visibility: hidden;
+}
+
+.focus-output label input:checked ~ .fa-check {
+	visibility: visible;
 }
 
 .focus-output span {
 	font-size: 1em;
-	margin: 0px 15px 0px 12px;
+	margin: 0px 15px;
 }
 
-.focus-output .fa-times {
+.focus-output button {
 	font-size: 0.6em;
-	margin-top: 5px;
+	margin-top: 5.5px;
+	color: var(--medium-gray);
+	border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding-top: 2.3px;
+}
+
+.focus-output button:hover {
+	background-color: var(--dark-gray);
 	color: var(--light-gray);
+}
+
+.focus-output button:active {
+	background-color: var(--medium-gray);
 }
 
 @media only screen and (max-height: 650px) {
@@ -392,7 +425,6 @@ button {
 
 #todo > button:hover {
 	color: var(--white);
-	cursor: pointer;
 }
 
 #todo .popup {
@@ -443,7 +475,6 @@ button {
 	position: absolute;
 	left: 255px;
 	top: 1.5px;
-	cursor: pointer;
 	width: 22px;
 	height: 22px;
 	border-radius: 50%;
@@ -483,7 +514,6 @@ button {
 	width: 70px;
 	height: 25px;
 	color: inherit;
-	cursor: pointer;
 }
 
 #todo li div button:hover {
@@ -523,7 +553,6 @@ button {
 	color: var(--white);
 	border-radius: 25px;
 	padding: 8px 27px;
-	cursor: pointer;
 	margin-bottom: 47px;
 	transition: opacity 0.2s;
 }

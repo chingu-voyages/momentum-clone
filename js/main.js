@@ -50,26 +50,35 @@ window.onload = function() {
 
 	//Implement main focus
 	let mainFocus = document.getElementById("main-focus");
-	let mainFocusHeader = mainFocus.getElementsByTagName("span")[0];
-	let mainFocusInput = mainFocus.getElementsByTagName("input")[0];
-	let mainFocusOutput = mainFocus.getElementsByTagName("div")[0];
+	let focusHeader = mainFocus.getElementsByTagName("span")[0];
+	let focusInput = mainFocus.getElementsByTagName("input")[0];
+
 	let outputHeader = mainFocus.getElementsByTagName("span")[2];
-	mainFocusOutput.style.display = "none" ;
+	let focusOutput = mainFocus.getElementsByTagName("div")[0];
+	let focusCheck = focusOutput.getElementsByTagName("label")[0];
+	let focusTask = focusOutput.getElementsByTagName("span")[1];
+	let focusDelete = focusOutput.getElementsByTagName("button")[0];
+	let congrats = mainFocus.getElementsByClassName("hint")[1];
+
 	outputHeader.style.display = "none";
+	focusOutput.style.display = "none" ;
+	congrats.style.display = "none";
 
 	let instruction = mainFocus.getElementsByTagName("span")[1];
 	instruction.style.opacity = "0";
 	let showInstruction;
 
-	mainFocusInput.addEventListener("keyup", (e) => {
+	//Implement input screen and user submission
+	focusInput.addEventListener("keyup", (e) => {
 		clearTimeout(showInstruction);
-		if (hasContent(mainFocusInput)) {
+		if (hasContent(focusInput)) {
 			if (e.keyCode === 13) {
-				mainFocusOutput.getElementsByTagName("span")[1].innerHTML = mainFocusInput.value.trim();
-				mainFocusInput.style.display = "none";
-				mainFocusHeader.style.display = "none";
+				focusTask.innerHTML = focusInput.value.trim();
+				focusInput.style.display = "none";
+				focusHeader.style.display = "none";
 				outputHeader.style.display = "block";
-				mainFocusOutput.style.display = "flex";
+				focusOutput.style.display = "flex";
+				congrats.style.display = "block";
 				instruction.style.opacity = "0";
 				instruction.style.display = "none";
 			} else {
@@ -82,6 +91,30 @@ window.onload = function() {
 			instruction.style.opacity = "0";
 		};
 	});
+
+	//Implement transitions for main focus output
+	let congratsMessages = ["Good job!", "Nice.", "Way to go!", "Great work!"];
+	let showCongrats
+	focusCheck.getElementsByTagName("input")[0].addEventListener("change", (e) => {
+		if (focusCheck.getElementsByTagName("input")[0].checked) {
+			focusTask.style.textDecoration = "line-through";
+			focusTask.style.color = "var(--light-gray)";	
+			[focusCheck, focusDelete].forEach((x) => x.style.opacity = "1");
+			//Show congratulations message
+			congrats.innerHTML = congratsMessages[Math.floor(Math.random() * congratsMessages.length)]
+			congrats.style.opacity = "1";
+			showCongrats = setTimeout(() => {
+				congrats.style.opacity = "0";
+			}, 3000);
+
+		} else {
+			focusTask.style = "";
+			[focusCheck, focusDelete].forEach((x) => x.style.opacity = "");
+			clearTimeout(showCongrats);
+			congrats.style.opacity = "0";
+
+		}
+	})
 
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];

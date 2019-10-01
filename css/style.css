@@ -272,24 +272,30 @@ button {
 	justify-self: center; 
 	align-self: start;
 	font-size: 2.3em;
-	display: flex;
-	flex-direction: column;
 	margin-top: 65px;
-	align-items: center;
 }
 
-#main-focus > input {
-	text-align: center;
-    width: 100%;
-    margin-bottom: 12px;
+#main-focus > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: opacity 0.5s;
 }
 
 #main-focus .hint {
     font-size: 0.5em;
     transition: opacity 0.5s;
+    margin: 0;
+    font-weight: normal;
 }
 
-#main-focus .hint + span {
+#input-screen > input {
+	text-align: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+#output-screen > span {
 	font-size: 65%;
 	font-weight: bold;
 	margin-bottom: 7.5px;

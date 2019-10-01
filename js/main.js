@@ -49,39 +49,35 @@ window.onload = function() {
 	setInterval(updateClock, 500);
 
 	//Implement main focus
-	let mainFocus = document.getElementById("main-focus");
-	let focusHeader = mainFocus.getElementsByTagName("span")[0];
-	let focusInput = mainFocus.getElementsByTagName("input")[0];
+	let inputScreen = document.getElementById("input-screen");
+	let inputHeader = inputScreen.getElementsByTagName("span")[0];
+	let focusInput = inputScreen.getElementsByTagName("input")[0];
+	let instruction = inputScreen.getElementsByClassName("hint")[0];
 
-	let outputHeader = mainFocus.getElementsByTagName("span")[2];
-	let focusOutput = mainFocus.getElementsByTagName("div")[0];
+	let outputScreen = document.getElementById("output-screen");
+	let outputHeader = outputScreen.getElementsByTagName("span")[0];
+	let focusOutput = outputScreen.getElementsByTagName("div")[0];
 	let focusCheck = focusOutput.getElementsByTagName("label")[0];
 	let focusTask = focusOutput.getElementsByTagName("span")[1];
 	let focusDelete = focusOutput.getElementsByTagName("button")[0];
-	let congrats = mainFocus.getElementsByClassName("hint")[1];
+	let congrats = outputScreen.getElementsByClassName("hint")[0];
 
-	outputHeader.style.display = "none";
-	focusOutput.style.display = "none" ;
-	congrats.style.display = "none";
+	outputScreen.style.display = "none";
 
-	let instruction = mainFocus.getElementsByTagName("span")[1];
+	//Implement input screen and user submission
 	instruction.style.opacity = "0";
 	let showInstruction;
 
-	//Implement input screen and user submission
 	focusInput.addEventListener("keyup", (e) => {
 		clearTimeout(showInstruction);
 		if (hasContent(focusInput)) {
 			if (e.keyCode === 13) {
 				focusTask.innerHTML = focusInput.value.trim();
-				focusInput.value = "";
-				focusInput.style.display = "none";
-				focusHeader.style.display = "none";
-				outputHeader.style.display = "block";
-				focusOutput.style.display = "flex";
-				congrats.style.display = "block";
-				instruction.style.opacity = "0";
-				instruction.style.display = "none";
+				focusTransition(outputScreen, inputScreen);
+				setTimeout(() => {
+					instruction.style.opacity = "0";
+					focusInput.value = ""
+				}, 500)
 			} else {
 				//Prompt user to hit enter after 4 seconds
 				showInstruction = setTimeout(() => {
@@ -111,21 +107,36 @@ window.onload = function() {
 			//Turn x button into +
 			focusDelete.style.transform = "rotate(45deg)";
 		} else {
-			[focusCheck, focusTask, focusDelete].forEach((x) => x.style = "");
-			clearTimeout(showCongrats);
-			congrats.style.opacity = "0";
+			resetFocusCheck();
 		};
 	});
 
 	//Delete main focus and allow user to input a new one
 	focusDelete.addEventListener("click", (e) => {
-		[outputHeader, focusOutput, congrats].forEach((x) => x.style.display = "none");
-		[focusInput, focusHeader].forEach((x) => x.style.display = "block");
+		focusTransition(inputScreen, outputScreen);
+		setTimeout(() => {
+			focusCheckBox.checked = false;
+			resetFocusCheck();
+		}, 500)
+	});
+
+	let focusTransition = (fadeIn, fadeOut) => {
+		fadeOut.style.opacity = "0";
+		fadeIn.style.opacity = "0";
+		setTimeout(() => {
+			fadeOut.style.display = "none";
+			fadeIn.style.display = "flex";
+			setTimeout(() => {
+				fadeIn.style.opacity = "1";				
+			}, 100)
+		}, 500)
+	}
+
+	let resetFocusCheck = () => {
 		[focusCheck, focusTask, focusDelete].forEach((x) => x.style = "");
 		clearTimeout(showCongrats);
-		congrats.style.opacity = "0";
-		focusCheckBox.checked = false;
-	});
+		congrats.style.opacity = "0";		
+	}
 
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];

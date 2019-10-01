@@ -36,6 +36,7 @@ input {
 button {
 	outline: none;
 	border: none;
+	cursor: pointer;
 	background-color: transparent;
 }
 
@@ -190,6 +191,9 @@ button {
 	justify-self: center;
 	align-self: end;
 	margin-top: 25vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .time {
@@ -267,6 +271,132 @@ button {
 	grid-column: 1 / 4;
 	justify-self: center; 
 	align-self: start;
+	font-size: 2.3em;
+	margin-top: 65px;
+}
+
+#main-focus > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: opacity 0.5s;
+}
+
+#main-focus .hint {
+    font-size: 0.5em;
+    transition: opacity 0.5s;
+    margin: 0;
+    font-weight: normal;
+}
+
+#input-screen > input {
+	text-align: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+#output-screen > span {
+	font-size: 65%;
+	font-weight: bold;
+	margin-bottom: 7.5px;
+    margin-top: 7px;
+}
+
+.focus-output {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 8px;
+}
+
+.focus-hover {
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.focus-output:hover .focus-hover {
+	opacity: 1;
+}
+
+.focus-output label {
+	position: relative;
+	cursor: pointer;
+	height: 25px;
+	width: 25px;
+	margin-top: 7px;
+}
+
+.focus-output label input {
+	position: absolute;
+	height: 0;
+	width: 0;
+}
+
+.focus-output label span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	height: 17px;
+	width: 17px;
+	border: 2px solid var(--light-gray);
+	border-radius: 5px;
+	transition: border-color 0.25s;
+}
+
+.focus-output label:hover span {
+	border-color: var(--white);
+}
+
+.focus-output label input:checked + span {
+	border-color: var(--white);
+}
+
+.focus-output .fa-check {
+	position: absolute;
+	top: 0;
+	left: 5px;
+	color: var(--light-gray);
+	font-size: 0.6em;
+	visibility: hidden;
+}
+
+.focus-output label input:checked ~ .fa-check {
+	visibility: visible;
+}
+
+.focus-output span {
+	font-size: 1em;
+	margin: 0px 15px;
+}
+
+.focus-output button {
+	font-size: 0.6em;
+	margin-top: 5.5px;
+	color: var(--medium-gray);
+	border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding-top: 2.3px;
+    transition: transform 0.5s;
+}
+
+.focus-output button:hover {
+	background-color: var(--dark-gray);
+	color: var(--light-gray);
+}
+
+.focus-output button:active {
+	background-color: var(--medium-gray);
+}
+
+@media only screen and (max-height: 650px) {
+	#main-focus {
+		font-size: 2em;		
+		margin-top: 40px;
+		height: 120px;
+	}
 }
 
 /*-----Photo Credit Styling-----*/
@@ -282,6 +412,7 @@ button {
 
 .quote {
 	text-align: center;
+	margin: 0;
 }
 
 .quote-author {
@@ -302,7 +433,6 @@ button {
 
 #todo > button:hover {
 	color: var(--white);
-	cursor: pointer;
 }
 
 #todo .popup {
@@ -353,7 +483,6 @@ button {
 	position: absolute;
 	left: 255px;
 	top: 1.5px;
-	cursor: pointer;
 	width: 22px;
 	height: 22px;
 	border-radius: 50%;
@@ -393,7 +522,6 @@ button {
 	width: 70px;
 	height: 25px;
 	color: inherit;
-	cursor: pointer;
 }
 
 #todo li div button:hover {
@@ -433,7 +561,6 @@ button {
 	color: var(--white);
 	border-radius: 25px;
 	padding: 8px 27px;
-	cursor: pointer;
 	margin-bottom: 47px;
 	transition: opacity 0.2s;
 }

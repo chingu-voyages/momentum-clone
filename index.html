@@ -46,8 +46,26 @@
         <span class="welcome"></span>
       </section>
       <section id="main-focus">
-        <h1>What would you like to do today?</h1>
-        <input type="text">
+        <div id="input-screen">
+          <span>What is your main focus for today?</span>
+          <input type="text">
+          <span class="hint">Press enter to set your focus</span>
+        </div>
+        <div id="output-screen">
+          <span>TODAY</span>
+          <div class="focus-output">
+            <label class="focus-hover">
+              <input type="checkbox"/>
+              <span></span>
+              <i class="fas fa-check"></i>
+            </label>
+            <span></span>
+            <button class="focus-hover">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <span class="hint"></span>
+        </div>
       </section>
       <section id="photo-credit">
         <span>Photo by Will Li on <a href="https://unsplash.com/photos/LNrLkNcCXFc">Unsplash</a></span>

@@ -138,6 +138,31 @@ window.onload = function() {
 		congrats.style.opacity = "0";		
 	}
 
+	//Implement links section
+	let links = document.getElementsByClassName("links")[0];
+	let linksToggle = links.getElementsByClassName("module-button")[0];
+	let linksBox = links.getElementsByTagName("div")[0];	
+	let linkButtons = linksBox.getElementsByTagName("button");
+
+	linksBox.style.visibility = "hidden";
+	linksToggle.addEventListener("click", (e) => {
+		linksBox.style.visibility = (linksBox.style.visibility === "visible") ? "hidden" : "visible";
+	});
+
+	window.addEventListener("click", (e) => {
+		if (!links.contains(e.target)) {
+			linksBox.style.visibility = "hidden";
+		}
+	})
+
+	linkButtons[0].addEventListener("click", (e) => {
+		location.href = "https://www.google.com/";
+	})
+
+	linkButtons[1].addEventListener("click", (e) => {
+		location.href = "https://chrome.google.com/webstore/category/extensions";
+	})
+
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
 	search.addEventListener("keyup", (e) => {

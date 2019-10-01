@@ -70,17 +70,64 @@ button {
 	color: var(--light-gray);	
 }
 
+/*-----Links Styling-----*/
+
+.module-button {
+	font-size: inherit;
+	padding: 0;
+}
+
+.module-button:hover {
+	color: var(--white);
+}
+
 .links {
 	margin-right: 15px;
 }
 
-.links a {
-	text-decoration: none;
+.links > div {
+	position: absolute;
+    top: 60px;
+    left: 7px;
+    width: 250px;
 }
 
-.links a:hover {
+.links .popup {
+	position: absolute;
+    transform: rotate(180deg);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.links .popup-content {
+	margin: 16px 17px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.links .popup-content button {
+	padding: 4px 0px;
+	font-size: 95%;
+	width: 100%;
+    text-align: left;
+}
+
+.links .popup-content i {
+	padding-right: 7px;
+}
+
+.links .popup-content button:hover {
 	color: var(--white);
 }
+
+.new-link {
+	color: var(--medium-gray);
+}
+
+/*-----Search Bar Styling-----*/
 
 .fa-search {
 	position: absolute;
@@ -424,15 +471,6 @@ button {
 #todo {
 	align-self: end;
 	justify-self: end;
-}
-
-#todo > button {
-	font-size: inherit;
-	padding: 0;
-}
-
-#todo > button:hover {
-	color: var(--white);
 }
 
 #todo .popup {

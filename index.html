@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Momentum Clone</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,16 @@
   <main>
       <section id="web">
         <div class="links">
-          <a href="#" class="focus">Links</a>
+          <button class="focus module-button">Links</button>
+          <div>
+            <div class="popup"></div>
+            <div class="popup-content">
+              <button class="focus" href="https://www.google.com"><i class="fab fa-chrome"></i>Chrome Tab</button>
+              <button class="focus"><i class="fas fa-th"></i>Apps</button>
+              <button class="focus new-link"><i class="fas fa-plus"></i>New Link</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="search">
           <input type="text" class="focus"/>
@@ -75,7 +84,7 @@
         <p class="quote-author">~Ron Hall</p>
       </section>
       <section id="todo">
-        <button class="focus">Todo</button>
+        <button class="focus module-button">Todo</button>
         <div class="popup">
           <span>Today</span>
           <ul></ul>

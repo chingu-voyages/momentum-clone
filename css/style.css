@@ -101,25 +101,35 @@ button {
 }
 
 .links .popup-content {
-	margin: 16px 17px;
+	display: flex;
+	flex-direction: row;
+	width: 250px;
+	overflow: hidden;
+}
+
+.link-list, .link-form {
+	min-width: 250px;
+	padding: 16px 17px;
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-start;
+	transition: transform 0.3s;
 }
 
-.links .popup-content button {
+.link-list button {
 	padding: 4px 0px;
 	font-size: 95%;
 	width: 100%;
     text-align: left;
 }
 
-.links .popup-content i {
+.link-list i {
 	padding-right: 7px;
 }
 
-.links .popup-content button:hover {
+.link-list button:hover {
 	color: var(--white);
 }
 
@@ -127,6 +137,68 @@ button {
 	color: var(--medium-gray);
 }
 
+.link-form {
+	height: 245px;
+	justify-content: space-between;
+    padding: 10px 20px 20px 20px;
+}
+
+.link-back {
+	border-radius: 50%;
+	color: var(--medium-gray);
+	width: 25px;
+    height: 25px;
+    margin-left: -6px;
+}
+
+.link-back:hover {
+	background-color: var(--dark-gray);
+	color: var(--light-gray);
+}
+
+.link-form label {
+	font-size: 70%;
+	width: 100%;
+    font-weight: bold;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.link-form input {
+	width: 100%;
+	border-color: var(--medium-gray);
+	padding: 6px 0px;
+    font-size: 1.3em;
+    color: var(--white);
+    transition: background-color 0.5s ease-out;
+}
+
+.link-form input:hover {
+	border-color: rgba(255, 255, 255, 0.6);
+}
+
+.link-form input:focus {
+	border-color: var(--light-gray);
+}
+
+.link-form input:placeholder {
+	color: var(--medium-gray);
+}
+
+.link-create {
+	color: var(--white);
+	background-color: var(--medium-gray);
+	border-radius: 20px;
+    padding: 8px 25px;
+    margin-top: 25px;
+}
+
+.link-create:hover {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.link-create:active {
+	background-color: var(--light-gray);
+}
 /*-----Search Bar Styling-----*/
 
 .fa-search {
@@ -247,11 +319,14 @@ button {
 	font-size: 10.5em;
 	text-align: center;
 	margin: -25px 0;
+	z-index: -2;
+
 }
 
 .welcome {
 	font-size: 3.5em;
 	text-align: center;
+	z-index: -2;
 }
 
 .prompt {

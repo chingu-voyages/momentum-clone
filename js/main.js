@@ -141,27 +141,106 @@ window.onload = function() {
 	//Implement links section
 	let links = document.getElementsByClassName("links")[0];
 	let linksToggle = links.getElementsByClassName("module-button")[0];
-	let linksBox = links.getElementsByTagName("div")[0];	
-	let linkButtons = linksBox.getElementsByTagName("button");
+	let linkBox = links.getElementsByTagName("div")[0];	
+	let linkList = linkBox.getElementsByClassName("link-list")[0];
+	let linkButtons = linkList.getElementsByTagName("button");
 
-	linksBox.style.visibility = "hidden";
+	//Toggle links on clicking Links button
+	linkBox.style.display = "none";
 	linksToggle.addEventListener("click", (e) => {
-		linksBox.style.visibility = (linksBox.style.visibility === "visible") ? "hidden" : "visible";
+		linkBox.style.display = (linkBox.style.display === "block") ? "none" : "block";
 	});
-
 	window.addEventListener("click", (e) => {
 		if (!links.contains(e.target)) {
-			linksBox.style.visibility = "hidden";
+			linkBox.style.display = "none";
 		}
 	})
 
+	//Add link locations to permanent buttons
 	linkButtons[0].addEventListener("click", (e) => {
 		location.href = "https://www.google.com/";
 	})
-
 	linkButtons[1].addEventListener("click", (e) => {
 		location.href = "https://chrome.google.com/webstore/category/extensions";
 	})
+
+	//Add new link
+	let newLink = linkList.getElementsByClassName("new-link")[0];
+	let linkForm = linkBox.getElementsByClassName("link-form")[0];
+	let linkBack = linkForm.getElementsByClassName("link-back")[0];
+	let linkName = linkForm.getElementsByTagName("input")[0];
+	let linkAddress = linkForm.getElementsByTagName("input")[1];
+	let linkCreate = linkForm.getElementsByClassName("link-create")[0];
+
+	linkForm.style.display = "none";
+	
+	//Transition between link list and new link form
+	newLink.addEventListener("click", (e) => {
+		linkList.style.transform = "translate(-250px)";
+		linkForm.style.display = "flex";
+		setTimeout(() => {
+			linkForm.style.transform = "translate(-250px)";
+		}, 100)
+		linkList.style.visibility = "none";
+	});
+	linkBack.addEventListener("click", (e) => {
+		backToList();
+	});
+
+	//Transition from new link form to link list
+	let backToList = function() {
+		linkForm.style.transform = "translate(0px)";
+		linkList.style.visibility = "visible";
+		linkList.style.transform = "translate(0px)";
+		setTimeout(() => {
+			linkForm.style.display = "none";
+		}, 100)
+
+	}
+
+	//Add new link
+	linkCreate.addEventListener("click", (e) => {
+		if (hasContent(linkName) && hasContent(linkAddress)) {
+			let addedLink = document.createElement("button");
+			addedLink.className = "focus";
+			let addedLinkAddress = linkAddress.value;
+			addedLink.addEventListener("click", (e) => {
+				//Format user input into valid link address
+				let prefix;
+				if (addedLinkAddress.startsWith("https://www.")){
+					prefix = "";
+				} else if (addedLinkAddress.startsWith("http://www.")) {
+					prefix = "";
+					addedLinkAddress = addedLinkAddress.replace("http:", "https:");
+				} else if (addedLinkAddress.startsWith("www.")) {
+					prefix = "https://"
+				} else {
+					prefix = "https://www."
+				}
+				location.href = prefix + addedLinkAddress;
+			})
+			let addedLinkIcon = document.createElement("i");		
+			addedLinkIcon.className = "fas fa-chevron-circle-right";
+			let addedLinkName = document.createTextNode(linkName.value);
+
+			//Insert link
+			addedLink.appendChild(addedLinkIcon);
+			addedLink.appendChild(addedLinkName);
+			linkList.insertBefore(addedLink, newLink);
+			
+			//Transition back to link list
+			backToList();
+			linkName.value = "";
+			linkAddress.value = "";
+
+		} else if (hasContent(linkName) && !hasContent(linkAddress)) {
+			linkAddress.style.backgroundColor = "var(--light-gray)";
+			setTimeout(() => linkAddress.style.backgroundColor = "", 200);
+		} else {
+			linkName.style.backgroundColor = "var(--light-gray)";
+			setTimeout(() => linkName.style.backgroundColor = "", 200);
+		}
+	});
 
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
@@ -204,7 +283,8 @@ window.onload = function() {
 		console.log("geolocation unavailable");
 	}
 
-	let fetchWeather = function(lat, lon) { // Make API call
+	// Make API call
+	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
 		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
 		req.onload = function() {

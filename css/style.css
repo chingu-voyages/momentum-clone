@@ -58,6 +58,53 @@ button {
 	right: 25px;
 }
 
+.menu-toggle {
+	position: absolute;
+	top: 1.5px;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	color: var(--medium-gray);
+	font-size: 72%;
+	padding-right: 17px;
+	padding-top: 2px;
+	opacity: 0;
+}
+
+li:hover > .menu-toggle {
+	opacity: 1;
+}
+
+li .menu-toggle:hover {
+	opacity: 1;
+	background-color: var(--dark-gray);
+	color: var(--light-gray);
+}
+
+li .menu-toggle:active {
+	background-color: var(--medium-gray);
+}
+
+.menu {
+	justify-content: flex-end;
+	position: absolute;
+	background-color: rgb(64, 64, 64);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	z-index: 5;
+}
+
+.menu button {
+	width: 70px;
+	height: 25px;
+	color: inherit;
+}
+
+.menu button:hover {
+	background-color: rgb(105, 105, 105);
+}
+
 /*-----Web Styling-----*/
 #web {
 	display: flex;
@@ -111,35 +158,51 @@ button {
 	min-width: 250px;
 	padding: 16px 17px;
 	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: flex-start;
 	transition: transform 0.3s;
 }
 
-.link-list button {
+.link-list {
+	list-style: none;
+	margin: 0;
+}
+
+.link-list li {
+	position: relative;
+}
+
+.link-list .focus {
 	padding: 4px 0px;
 	font-size: 95%;
 	width: 100%;
     text-align: left;
 }
 
+.link-list .focus:hover {
+	color: var(--white);
+}
+
 .link-list i {
 	padding-right: 7px;
 }
 
-.link-list button:hover {
-	color: var(--white);
-}
-
-.new-link {
+.add-link .focus {
 	color: var(--medium-gray);
 }
 
+.link-list .menu-toggle {
+	left: 190px;
+}
+
+.link-list .menu {
+	left: 118px;
+}
+
 .link-form {
-	height: 245px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 	justify-content: space-between;
+	height: 245px;
     padding: 10px 20px 20px 20px;
 }
 
@@ -592,53 +655,12 @@ button {
 	color: var(--medium-gray);
 }
 
-#todo li > button {
-	position: absolute;
+#todo .menu-toggle {
 	left: 255px;
-	top: 1.5px;
-	width: 22px;
-	height: 22px;
-	border-radius: 50%;
-	color: var(--medium-gray);
-	font-size: 72%;
-	padding-right: 17px;
-	padding-top: 2px;
-	opacity: 0;
 }
 
-#todo li:hover > button {
-	opacity: 1;
-}
-
-#todo li > button:hover {
-	opacity: 1;
-	background-color: var(--dark-gray);
-	color: var(--light-gray);
-}
-
-#todo li > button:active {
-	background-color: var(--medium-gray);
-}
-
-#todo li div {
-	justify-content: flex-end;
-	position: absolute;
+#todo .menu {
 	left: 183px;
-	background-color: rgb(64, 64, 64);
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	z-index: 5;
-}
-
-#todo li div button {
-	width: 70px;
-	height: 25px;
-	color: inherit;
-}
-
-#todo li div button:hover {
-	background-color: rgb(105, 105, 105);
 }
 
 ::-webkit-scrollbar {

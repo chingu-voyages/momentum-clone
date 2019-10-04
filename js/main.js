@@ -174,10 +174,13 @@ window.onload = function() {
 
 	linkForm.style.display = "none";
 	
+	let linkMode = {};
+
 	//Transition between link list and new link form
 	let addLinkButton = addLink.getElementsByClassName("focus")[0]; 
 	addLinkButton.addEventListener("click", (e) => {
 		switchToForm();
+		linkMode.editing = false;
 	});
 	backButton.addEventListener("click", (e) => {
 		switchToList();
@@ -200,6 +203,8 @@ window.onload = function() {
 		linkList.style.transform = "translate(0px)";
 		setTimeout(() => {
 			linkForm.style.display = "none";
+			linkName.value = "";
+			linkAddress.value = "";
 		}, 100)
 
 	}
@@ -207,44 +212,38 @@ window.onload = function() {
 	//Add new link
 	createLink.addEventListener("click", (e) => {
 		if (hasContent(linkName) && hasContent(linkAddress)) {
-			let newLink = document.createElement("li");
-			let newLinkButton = document.createElement("button");
-			newLinkButton.className = "focus";
-			let newLinkAddress = linkAddress.value;
-			newLinkButton.addEventListener("click", (e) => {
-				//Format user input into valid link address
-				let prefix;
-				if (newLinkAddress.startsWith("https://www.")){
-					prefix = "";
-				} else if (newLinkAddress.startsWith("http://www.")) {
-					prefix = "";
-					newLinkAddress = newLinkAddress.replace("http:", "https:");
-				} else if (newLinkAddress.startsWith("www.")) {
-					prefix = "https://"
-				} else {
-					prefix = "https://www."
-				}
-				location.href = prefix + newLinkAddress;
-			})
-			let newLinkIcon = document.createElement("i");		
-			newLinkIcon.className = "fas fa-chevron-circle-right";
-			let newLinkName = document.createTextNode(linkName.value);
+			if (linkMode.editing) {
+				let linkToEdit = linkMode.node.getElementsByClassName("focus")[0];
+				linkToEdit.textContent = "";
+				let newLinkIcon = document.createElement("i");		
+				newLinkIcon.className = "fas fa-chevron-circle-right";
+				let newLinkName = document.createTextNode(linkName.value);
+				linkToEdit.appendChild(newLinkIcon);
+				linkToEdit.appendChild(newLinkName);				
+				linkToEdit.href = formatLink(linkAddress.value)
+			} else {
+				let newLink = document.createElement("li");
+				let newLinkButton = document.createElement("button");
+				newLinkButton.className = "focus";
+				newLinkButton.href = formatLink(linkAddress.value);
+				newLinkButton.addEventListener("click", (e) => {
+					location.href = newLinkButton.href;
+				})
+				let newLinkIcon = document.createElement("i");		
+				newLinkIcon.className = "fas fa-chevron-circle-right";
+				let newLinkName = document.createTextNode(linkName.value);
 
-			buildMenu(newLink);
+				buildMenu(newLink);
 
-			//Insert link
-			newLinkButton.appendChild(newLinkIcon);
-			newLinkButton.appendChild(newLinkName);
-			newLink.appendChild(newLinkButton)
-			linkList.insertBefore(newLink, addLink);
-			
-			implementMenu(linkList, linkList.childElementCount - 2, false);
-
-			//Transition back to link list
+				//Insert link
+				newLinkButton.appendChild(newLinkIcon);
+				newLinkButton.appendChild(newLinkName);
+				newLink.appendChild(newLinkButton)
+				linkList.insertBefore(newLink, addLink);
+				
+				implementMenu(linkList, linkList.childElementCount - 2, false);
+			}
 			switchToList();
-			linkName.value = "";
-			linkAddress.value = "";
-
 		} else if (hasContent(linkName) && !hasContent(linkAddress)) {
 			linkAddress.style.backgroundColor = "var(--light-gray)";
 			setTimeout(() => linkAddress.style.backgroundColor = "", 200);
@@ -253,6 +252,22 @@ window.onload = function() {
 			setTimeout(() => linkName.style.backgroundColor = "", 200);
 		}
 	});
+
+	//Format user input into valid link address
+	let formatLink = function(linkAddress) {
+		let prefix;
+		if (linkAddress.startsWith("https://www.")){
+			prefix = "";
+		} else if (linkAddress.startsWith("http://www.")) {
+			prefix = "";
+			linkAddress = linkAddress.replace("http:", "https:");
+		} else if (linkAddress.startsWith("www.")) {
+			prefix = "https://"
+		} else {
+			prefix = "https://www."
+		}
+		return prefix + linkAddress
+	}
 
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
@@ -430,7 +445,7 @@ window.onload = function() {
 		});
 		del.addEventListener("click", (e) => {
 			item.remove();
-			linkBox.style.display = (!isTodo) ? "block" : "";
+			linkBox.style.display = (isTodo) ? "" : "block";
 		})
 
 		window.addEventListener("click", (e) => {
@@ -488,7 +503,14 @@ window.onload = function() {
 
 	//Implement edit feature for links
 	let editLink = function(edit, item) {
-		switchToForm();
+		edit.addEventListener("click", (e) => {
+			let linkToEdit = item.getElementsByClassName("focus")[0];
+			linkName.value = linkToEdit.textContent;
+			linkAddress.value = linkToEdit.href;
+			switchToForm();
+			linkMode.editing = true;
+			linkMode.node = item;
+		})
 	}
 
 	//Check that the content of an input isn't only whitespace

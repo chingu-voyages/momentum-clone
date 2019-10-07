@@ -138,6 +138,136 @@ window.onload = function() {
 		congrats.style.opacity = "0";		
 	}
 
+	//Implement links section
+	let links = document.getElementsByClassName("links")[0];
+	let linksToggle = links.getElementsByClassName("module-button")[0];
+	let linkBox = links.getElementsByTagName("div")[0];	
+	let linkList = linkBox.getElementsByClassName("link-list")[0];
+	let linkButtons = linkList.getElementsByTagName("ul")[0];
+
+	//Toggle links on clicking Links button
+	linkBox.style.display = "none";
+	linksToggle.addEventListener("click", (e) => {
+		linkBox.style.display = (linkBox.style.display === "block") ? "none" : "block";
+	});
+	let activeMenu;
+	window.addEventListener("click", (e) => {
+		if (activeMenu && activeMenu.contains(e.target)) {
+			linkBox.style.display = "block";
+		}
+		else if (!links.contains(e.target)) {
+			linkBox.style.display = "none";
+			switchToList();
+		}
+	})
+
+	//Add link locations to permanent buttons
+	linkButtons.getElementsByClassName("focus")[0].addEventListener("click", (e) => {
+		location.href = "https://www.google.com/";
+	})
+	linkButtons.getElementsByClassName("focus")[1].addEventListener("click", (e) => {
+		location.href = "https://chrome.google.com/webstore/category/extensions";
+	})
+
+	//Add new link
+	let addLink = linkList.getElementsByClassName("add-link")[0];
+	let linkForm = linkBox.getElementsByClassName("link-form")[0];
+	let backButton = linkForm.getElementsByClassName("link-back")[0];
+	let linkName = linkForm.getElementsByTagName("input")[0];
+	let linkAddress = linkForm.getElementsByTagName("input")[1];
+	let createLink = linkForm.getElementsByClassName("link-create")[0];
+
+	linkForm.style.display = "none";
+	
+	let linkMode = {};
+
+	//Transition between link list and new link form
+	addLink.addEventListener("click", (e) => {
+		linkMode.editing = false;
+		switchToForm();
+	});
+	backButton.addEventListener("click", (e) => {
+		switchToList();
+	});
+
+	//Transition from link list to new link form
+	let switchToForm = function() {
+		createLink.textContent = (linkMode.editing) ? "Save" : "Create";
+		linkList.style.transform = "translate(-250px)";
+		linkForm.style.display = "flex";
+		setTimeout(() => {
+			linkForm.style.transform = "translate(-250px)";
+			setTimeout(() => linkName.focus(), 300);
+		}, 100)
+		linkList.style.visibility = "none";
+	}
+
+	//Transition from new link form to link list
+	let switchToList = function() {
+		linkForm.style.transform = "translate(0px)";
+		linkList.style.visibility = "visible";
+		linkList.style.transform = "translate(0px)";
+		setTimeout(() => {
+			linkForm.style.display = "none";
+			linkName.value = "";
+			linkAddress.value = "";
+		}, 100)
+
+	}
+
+	//Add new link
+	createLink.addEventListener("click", (e) => {
+		if (hasContent(linkName) && hasContent(linkAddress)) {
+			let newLinkIcon = document.createElement("i");		
+			newLinkIcon.className = "fas fa-chevron-circle-right";
+			let newLinkName = document.createTextNode(linkName.value);
+			if (linkMode.editing) {
+				let linkToEdit = linkMode.node.getElementsByClassName("focus")[0];
+				linkToEdit.textContent = "";
+				linkToEdit.appendChild(newLinkIcon);
+				linkToEdit.appendChild(newLinkName);				
+				linkToEdit.href = formatLink(linkAddress.value)
+			} else {
+				let newLink = document.createElement("li");
+				let newLinkButton = document.createElement("button");
+				newLinkButton.className = "focus";
+				newLinkButton.href = formatLink(linkAddress.value);
+				newLinkButton.addEventListener("click", (e) => {
+					location.href = newLinkButton.href;
+				})
+				buildMenu(newLink); //Add menu elements
+				newLinkButton.appendChild(newLinkIcon);
+				newLinkButton.appendChild(newLinkName);
+				newLink.appendChild(newLinkButton)
+				linkButtons.appendChild(newLink);
+				implementMenu(linkButtons, linkButtons.childElementCount - 1, false); //Implement menu functionality
+			}
+			switchToList();
+		} else if (hasContent(linkName) && !hasContent(linkAddress)) {
+			linkAddress.style.backgroundColor = "var(--light-gray)";
+			setTimeout(() => linkAddress.style.backgroundColor = "", 200);
+		} else {
+			linkName.style.backgroundColor = "var(--light-gray)";
+			setTimeout(() => linkName.style.backgroundColor = "", 200);
+		}
+	});
+
+	//Format user input into valid link address
+	let formatLink = function(linkAddress) {
+		let prefix;
+		if (linkAddress.startsWith("https://www.")){
+			prefix = "";
+		} else if (linkAddress.startsWith("http://www.")) {
+			prefix = "";
+			linkAddress = linkAddress.replace("http:", "https:");
+		} else if (linkAddress.startsWith("www.")) {
+			prefix = "https://"
+		} else {
+			prefix = "https://www."
+		}
+		return prefix + linkAddress
+	}
+
 	//Translate user search bar input into valid Google search query
 	let search = document.getElementsByClassName("search")[0].getElementsByTagName("input")[0];
 	search.addEventListener("keyup", (e) => {
@@ -179,7 +309,8 @@ window.onload = function() {
 		console.log("geolocation unavailable");
 	}
 
-	let fetchWeather = function(lat, lon) { // Make API call
+	// Make API call
+	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
 		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
 		req.onload = function() {
@@ -253,21 +384,15 @@ window.onload = function() {
 				let taskEditor = document.createElement("input");
 				taskEditor.type = "text";
 				taskEditor.style.display = "none";
-				let optionsIcon = document.createElement("i");
-				optionsIcon.className = "fa fa-ellipsis-h";
-				optionsButton = document.createElement("button");
-				optionsButton.appendChild(optionsIcon);
-				let optionsContainer = document.createElement("div");
-				[0, 1].forEach((i) => optionsContainer.appendChild(document.createElement("button")));
+
+				buildMenu(task);
 
 				task.appendChild(check);
 				task.appendChild(taskInput);
 				task.appendChild(taskEditor);
-				task.appendChild(optionsButton);
-				task.appendChild(optionsContainer);
 				todoList.appendChild(task);
 
-				makeMenu(todoList, todoList.childElementCount - 1);
+				implementMenu(todoList, todoList.childElementCount - 1, true);
 
 				todoList.scrollTop = todoList.scrollHeight;				
 				todoInput.value = "";
@@ -281,18 +406,53 @@ window.onload = function() {
 		}
 	})
 
+	//Build and style edit/delete menu
+	let buildMenu = function(item) {
+		let optionsIcon = document.createElement("i");
+		optionsIcon.className = "fa fa-ellipsis-h";
+		optionsButton = document.createElement("button");
+		optionsButton.appendChild(optionsIcon);
+		optionsButton.className = "menu-toggle";
+		let optionsContainer = document.createElement("div");
+		optionsContainer.className = "menu";
+		[0, 1].forEach((i) => optionsContainer.appendChild(document.createElement("button")));
+		item.appendChild(optionsButton);
+		item.appendChild(optionsContainer);
+	}
+
 	//Edit and remove to do list items
-	let makeMenu = function(list, ind) {
-		let task = list.getElementsByTagName("li")[ind];
-		let buttons = task.getElementsByTagName("button");
-		editDelete(buttons[1], buttons[2], task);
-		let toggle = buttons[0];
-		let menu = task.getElementsByTagName("div")[0];
+	let implementMenu = function(list, ind, isTodo) {
+		let item = list.getElementsByTagName("li")[ind];
+		let toggle = item.getElementsByClassName("menu-toggle")[0];
+		let menu = item.getElementsByClassName("menu")[0];
 		menu.style.display = "none";
+		let edit = menu.getElementsByTagName("button")[0];
+		let del = menu.getElementsByTagName("button")[1];
+		
+		//Style and implement edit
+		edit.innerHTML = "Edit";
+		edit.style.borderBottom = "1px solid var(--medium-gray)"
+		edit.addEventListener("mouseover", (e) => {
+			edit.style.borderRadius = "5px 5px 0px 0px";
+		});
+		(isTodo) ? editTask(edit, item) : editLink(edit, item);
+		
+		//Style and implement delete
+		del.innerHTML = "Delete";
+		del.addEventListener("mouseover", (e) => {
+			del.style.borderRadius = "0px 0px 5px 5px";
+		});
+		del.addEventListener("click", (e) => {
+			item.remove();
+			if (!isTodo) {
+				activeMenu = item.getElementsByClassName("menu")[0];
+			}
+		})
+
 		window.addEventListener("click", (e) => {
 			if (toggle.contains(e.target)) {
 				menu.style.display = (menu.style.display === "none") ? "flex" : "none";
-				toggle.style.opacity= (menu.style.display === "none") ? "" : "1"; 
+				toggle.style.opacity = (menu.style.display === "none") ? "" : "1"; 
 				listHeight = parseFloat(window.getComputedStyle(list, null).getPropertyValue("height").replace("px", ""));
 				listEnd = list.getBoundingClientRect().bottom;
 				menuEnd = menu.getBoundingClientRect().bottom;
@@ -308,18 +468,11 @@ window.onload = function() {
 		})
 	}
 
-	//Implement edit and delete features
-	let editDelete = function(edit, del, task) {
+	//Implement edit feature for todo list
+	let editTask = function(edit, task) {
 		let taskInput = task.getElementsByTagName("span")[0];
 		let taskEditor = task.getElementsByTagName("input")[1];
 		taskEditor.value = taskInput.innerHTML;
-		
-		//Implement edit
-		edit.innerHTML = "Edit";
-		edit.style.borderBottom = "1px solid var(--medium-gray)"
-		edit.addEventListener("mouseover", (e) => {
-			edit.style.borderRadius = "5px 5px 0px 0px";
-		});
 		taskEditor.addEventListener("focus", (e) => {
 			taskEditor.style.color = "rgba(255, 255, 255, 0.7)"
 		})
@@ -347,14 +500,17 @@ window.onload = function() {
 				taskInput.style.display = "";	
 			}
 		})
+	}
 
-		//Implement delete
-		del.innerHTML = "Delete";
-		del.addEventListener("mouseover", (e) => {
-			del.style.borderRadius = "0px 0px 5px 5px";
-		});
-		del.addEventListener("click", (e) => {
-			task.remove();
+	//Implement edit feature for links
+	let editLink = function(edit, item) {
+		edit.addEventListener("click", (e) => {
+			let linkToEdit = item.getElementsByClassName("focus")[0];
+			linkName.value = linkToEdit.textContent;
+			linkAddress.value = linkToEdit.href;
+			linkMode.editing = true;
+			linkMode.node = item;
+			switchToForm();
 		})
 	}
 

@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Momentum Clone</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,36 @@
   <main>
       <section id="web">
         <div class="links">
-          <a href="#" class="focus">Links</a>
+          <button class="focus module-button">Links</button>
+          <div>
+            <div class="popup"></div>
+            <div class="popup-content">
+              <div class="link-list">
+                <ul>
+                  <li>
+                    <button class="focus"><i class="fab fa-chrome"></i>Chrome Tab</button>
+                  </li>
+                  <li>
+                    <button class="focus"><i class="fas fa-th"></i>Apps</button>
+                  </li>
+                </ul>
+                <button class="add-link focus"><i class="fas fa-plus"></i>New Link</button>
+              </div>
+              <div class="link-form">
+                <button class="link-back">
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+                <label>NAME
+                  <input type="text"/>
+                </label>
+                <label>LINK
+                  <input type="text" placeholder="example.com"/>
+                </label>
+                <button class="link-create"></button>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="search">
           <input type="text" class="focus"/>
@@ -75,7 +104,7 @@
         <p class="quote-author">~Ron Hall</p>
       </section>
       <section id="todo">
-        <button class="focus">Todo</button>
+        <button class="focus module-button">Todo</button>
         <div class="popup">
           <span>Today</span>
           <ul></ul>

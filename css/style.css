@@ -156,14 +156,17 @@ li .menu-toggle:active {
 
 .link-list, .link-form {
 	min-width: 250px;
-	padding: 16px 17px;
+	padding: 16px 3px 16px 17px;
 	box-sizing: border-box;
 	transition: transform 0.3s;
 }
 
-.link-list {
+.link-list ul {
 	list-style: none;
 	margin: 0;
+	padding: 0;
+	max-height: 187.8px;
+	overflow: auto;
 }
 
 .link-list li {
@@ -185,7 +188,7 @@ li .menu-toggle:active {
 	padding-right: 7px;
 }
 
-.add-link .focus {
+.add-link {
 	color: var(--medium-gray);
 }
 

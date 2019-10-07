@@ -143,7 +143,7 @@ window.onload = function() {
 	let linksToggle = links.getElementsByClassName("module-button")[0];
 	let linkBox = links.getElementsByTagName("div")[0];	
 	let linkList = linkBox.getElementsByClassName("link-list")[0];
-	let linkButtons = linkList.getElementsByClassName("focus");
+	let linkButtons = linkList.getElementsByTagName("ul")[0];
 
 	//Toggle links on clicking Links button
 	linkBox.style.display = "none";
@@ -153,14 +153,15 @@ window.onload = function() {
 	window.addEventListener("click", (e) => {
 		if (!links.contains(e.target)) {
 			linkBox.style.display = "none";
+			switchToList();
 		}
 	})
 
 	//Add link locations to permanent buttons
-	linkButtons[0].addEventListener("click", (e) => {
+	linkButtons.getElementsByClassName("focus")[0].addEventListener("click", (e) => {
 		location.href = "https://www.google.com/";
 	})
-	linkButtons[1].addEventListener("click", (e) => {
+	linkButtons.getElementsByClassName("focus")[1].addEventListener("click", (e) => {
 		location.href = "https://chrome.google.com/webstore/category/extensions";
 	})
 
@@ -177,10 +178,9 @@ window.onload = function() {
 	let linkMode = {};
 
 	//Transition between link list and new link form
-	let addLinkButton = addLink.getElementsByClassName("focus")[0]; 
-	addLinkButton.addEventListener("click", (e) => {
-		switchToForm();
+	addLink.addEventListener("click", (e) => {
 		linkMode.editing = false;
+		switchToForm();
 	});
 	backButton.addEventListener("click", (e) => {
 		switchToList();
@@ -188,10 +188,12 @@ window.onload = function() {
 
 	//Transition from link list to new link form
 	let switchToForm = function() {
+		createLink.textContent = (linkMode.editing) ? "Save" : "Create";
 		linkList.style.transform = "translate(-250px)";
 		linkForm.style.display = "flex";
 		setTimeout(() => {
 			linkForm.style.transform = "translate(-250px)";
+			setTimeout(() => linkName.focus(), 300);
 		}, 100)
 		linkList.style.visibility = "none";
 	}
@@ -212,12 +214,12 @@ window.onload = function() {
 	//Add new link
 	createLink.addEventListener("click", (e) => {
 		if (hasContent(linkName) && hasContent(linkAddress)) {
+			let newLinkIcon = document.createElement("i");		
+			newLinkIcon.className = "fas fa-chevron-circle-right";
+			let newLinkName = document.createTextNode(linkName.value);
 			if (linkMode.editing) {
 				let linkToEdit = linkMode.node.getElementsByClassName("focus")[0];
 				linkToEdit.textContent = "";
-				let newLinkIcon = document.createElement("i");		
-				newLinkIcon.className = "fas fa-chevron-circle-right";
-				let newLinkName = document.createTextNode(linkName.value);
 				linkToEdit.appendChild(newLinkIcon);
 				linkToEdit.appendChild(newLinkName);				
 				linkToEdit.href = formatLink(linkAddress.value)
@@ -229,19 +231,12 @@ window.onload = function() {
 				newLinkButton.addEventListener("click", (e) => {
 					location.href = newLinkButton.href;
 				})
-				let newLinkIcon = document.createElement("i");		
-				newLinkIcon.className = "fas fa-chevron-circle-right";
-				let newLinkName = document.createTextNode(linkName.value);
-
-				buildMenu(newLink);
-
-				//Insert link
+				buildMenu(newLink); //Add menu elements
 				newLinkButton.appendChild(newLinkIcon);
 				newLinkButton.appendChild(newLinkName);
 				newLink.appendChild(newLinkButton)
-				linkList.insertBefore(newLink, addLink);
-				
-				implementMenu(linkList, linkList.childElementCount - 2, false);
+				linkButtons.appendChild(newLink);
+				implementMenu(linkButtons, linkButtons.childElementCount - 1, false); //Implement menu functionality
 			}
 			switchToList();
 		} else if (hasContent(linkName) && !hasContent(linkAddress)) {
@@ -445,7 +440,7 @@ window.onload = function() {
 		});
 		del.addEventListener("click", (e) => {
 			item.remove();
-			linkBox.style.display = (isTodo) ? "" : "block";
+			linkBox.style.display = "block";
 		})
 
 		window.addEventListener("click", (e) => {
@@ -507,9 +502,9 @@ window.onload = function() {
 			let linkToEdit = item.getElementsByClassName("focus")[0];
 			linkName.value = linkToEdit.textContent;
 			linkAddress.value = linkToEdit.href;
-			switchToForm();
 			linkMode.editing = true;
 			linkMode.node = item;
+			switchToForm();
 		})
 	}
 

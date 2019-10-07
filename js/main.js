@@ -150,8 +150,12 @@ window.onload = function() {
 	linksToggle.addEventListener("click", (e) => {
 		linkBox.style.display = (linkBox.style.display === "block") ? "none" : "block";
 	});
+	let activeMenu;
 	window.addEventListener("click", (e) => {
-		if (!links.contains(e.target)) {
+		if (activeMenu && activeMenu.contains(e.target)) {
+			linkBox.style.display = "block";
+		}
+		else if (!links.contains(e.target)) {
 			linkBox.style.display = "none";
 			switchToList();
 		}
@@ -440,7 +444,9 @@ window.onload = function() {
 		});
 		del.addEventListener("click", (e) => {
 			item.remove();
-			linkBox.style.display = "block";
+			if (!isTodo) {
+				activeMenu = item.getElementsByClassName("menu")[0];
+			}
 		})
 
 		window.addEventListener("click", (e) => {

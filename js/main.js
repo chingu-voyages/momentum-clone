@@ -309,7 +309,7 @@ window.onload = function() {
 		console.log("geolocation unavailable");
 	}
 
-	// Make API call
+	// Make weather API call
 	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
 		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
@@ -327,6 +327,30 @@ window.onload = function() {
 		}
 		req.send();
 	}
+
+	//Hide other elements on hovering over photo credits
+	let photoCredit = document.getElementById("photo-credit").getElementsByClassName("credits")[0];
+	let sections = document.getElementsByTagName("section");
+	let fadeText;
+	let hideText;
+	photoCredit.addEventListener("mouseover", (e) => {
+		fadeText = setTimeout(() => {
+			for (let i=0; i < sections.length; i++) {
+				if (sections[i].id !== "photo-credit") {
+					sections[i].style.opacity = "0";					
+					hideText = setTimeout(() => sections[i].style.visibility = "hidden", 500);
+				}
+			}
+		}, 4000)
+	})
+	photoCredit.addEventListener("mouseout", (e) => {
+		clearTimeout(fadeText);
+		clearTimeout(hideText);
+		for (let i=0; i < sections.length; i++) {
+			sections[i].style.opacity = "";					
+			sections[i].style.visibility = "";
+		}
+	})
 
 	//Implement to do list transitions
 	let todoSection = document.getElementById("todo");

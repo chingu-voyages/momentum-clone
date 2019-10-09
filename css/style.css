@@ -23,6 +23,10 @@ main {
 	transition: opacity 0.5s;
 }
 
+section {
+	transition: opacity 0.5s;
+}
+
 input {
 	font-size: inherit;
 	font-family: inherit;

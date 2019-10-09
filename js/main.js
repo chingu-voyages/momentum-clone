@@ -44,7 +44,7 @@ window.onload = function() {
 		let minutes = time.getMinutes();
 		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
 		clock.innerHTML = hours + ":" + minutes;
-		welcome.innerHTML = "Good " + partOfDay + ", " + userName;
+		welcome.innerHTML = "Good " + partOfDay + ", " + userName + ".";
 	};
 	setInterval(updateClock, 500);
 

@@ -645,38 +645,57 @@ li .menu-toggle:active {
 	padding-top: 1.5px;
 }
 
-.credits i {
+.favorite i {
 	position: absolute;
 	top: 0;
-	transition: 0s;
 }
 
-.credits .far {
+.favorite .far {
 	color: var(--light-gray);
 }
 
-.credits button:hover .far {
+.favorite:hover .far {
 	color: var(--white);
 }
 
-.credits .fas {
+.favorite .fas {
 	color: var(--white);
 }
 
 /*-----Quote Styling-----*/
 #quote {
 	align-self: end;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
-.quote {
+.quote-text {
 	text-align: center;
 	margin: 0;
+	transition: 0.25s;
+	font-size: 1.05em;
+}
+
+#quote:hover .quote-text {
+	transform: translateY(-7px);
 }
 
 .quote-author {
-	display: none;
+	position: absolute;
+	top: 0;
+	margin-top: -2px;
+	opacity: 0;
+	transition: 0.25s;
+	font-size: 82%;
+	padding-right: 8px;
+	display: flex;
+	color: var(--light-gray);
 }
 
+#quote:hover .quote-author {
+	opacity: 1;
+}
 
 /*-----Todo Styling-----*/
 #todo {

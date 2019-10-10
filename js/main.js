@@ -352,15 +352,35 @@ window.onload = function() {
 		}
 	})
 
-	//Change favorite heart to solid on click
-	let favorite = photoCredit.getElementsByTagName("button")[0];
-	let unfavHeart = favorite.getElementsByClassName("far")[0];
-	let favHeart = favorite.getElementsByClassName("fas")[0];
-	favHeart.style.opacity = "0";
-	favorite.addEventListener("click", (e) => {
-		favHeart.style.opacity = (favHeart.style.opacity === "0") ? "1" : "0";
-		unfavHeart.style.opacity = (unfavHeart.style.opacity === "0") ? "1" : "0";
+	//Reveal quote author on hover
+	let quoteBox = document.getElementById("quote");
+	let quote = quoteBox.getElementsByClassName("quote-text")[0];
+	let quoteAuthor = quoteBox.getElementsByClassName("quote-author")[0];
+
+	let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
+	window.addEventListener("resize", (e) => {
+		let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
+	});
+
+	quoteBox.addEventListener("mouseover", (e) => {
+		quoteAuthor.style.top = quoteHeight;
 	})
+
+	quoteBox.addEventListener("mouseout", (e) => {
+		quoteAuthor.style.top = "";
+	})
+
+	//Change favorite heart to solid on click
+	let favorite = document.getElementsByClassName("favorite");
+	for (let i=0; i < favorite.length; i++) {
+		let unfavHeart = favorite[i].getElementsByClassName("far")[0];
+		let favHeart = favorite[i].getElementsByClassName("fas")[0];
+		favHeart.style.opacity = "0";
+		favorite[i].addEventListener("click", (e) => {
+			favHeart.style.opacity = (favHeart.style.opacity === "0") ? "1" : "0";
+			unfavHeart.style.opacity = (unfavHeart.style.opacity === "0") ? "1" : "0";
+		})		
+	}
 
 	//Implement to do list transitions
 	let todoSection = document.getElementById("todo");

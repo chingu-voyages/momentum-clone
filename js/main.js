@@ -352,6 +352,16 @@ window.onload = function() {
 		}
 	})
 
+	//Change favorite heart to solid on click
+	let favorite = photoCredit.getElementsByTagName("button")[0];
+	let unfavHeart = favorite.getElementsByClassName("far")[0];
+	let favHeart = favorite.getElementsByClassName("fas")[0];
+	favHeart.style.opacity = "0";
+	favorite.addEventListener("click", (e) => {
+		favHeart.style.opacity = (favHeart.style.opacity === "0") ? "1" : "0";
+		unfavHeart.style.opacity = (unfavHeart.style.opacity === "0") ? "1" : "0";
+	})
+
 	//Implement to do list transitions
 	let todoSection = document.getElementById("todo");
 	let todoToggle = todoSection.getElementsByClassName("focus")[0];

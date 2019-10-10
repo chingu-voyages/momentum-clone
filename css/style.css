@@ -7,7 +7,7 @@ body {
 	--black-gray: rgba(0, 0, 0, 0.85);
 	background: url("../img/default.jpg") no-repeat center center fixed;
 	background-size: cover;
-	font-family: 'Arimo', sans-serif;
+	font-family: neue-haas-grotesk-text, sans-serif;
 	color: var(--white);
 	margin: 0;
 	overflow: hidden;
@@ -643,6 +643,24 @@ li .menu-toggle:active {
 
 .credits a {
 	padding-top: 1.5px;
+}
+
+.credits i {
+	position: absolute;
+	top: 0;
+	transition: 0s;
+}
+
+.credits .far {
+	color: var(--light-gray);
+}
+
+.credits button:hover .far {
+	color: var(--white);
+}
+
+.credits .fas {
+	color: var(--white);
 }
 
 /*-----Quote Styling-----*/

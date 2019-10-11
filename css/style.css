@@ -5,9 +5,9 @@ body {
 	--dark-gray: rgba(255, 255, 255, 0.3);
 	--blue-gray: rgba(52, 59, 66, 1);
 	--black-gray: rgba(0, 0, 0, 0.85);
-	background: url("../img/wallpaper1.jpg") no-repeat center center fixed;
+	background: url("../img/default.jpg") no-repeat center center fixed;
 	background-size: cover;
-	font-family: 'Roboto', sans-serif;
+	font-family: neue-haas-grotesk-text, sans-serif;
 	color: var(--white);
 	margin: 0;
 	overflow: hidden;
@@ -20,6 +20,10 @@ main {
 	box-sizing: border-box;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 3fr 3fr 1fr;
+	transition: opacity 0.5s;
+}
+
+section {
 	transition: opacity 0.5s;
 }
 
@@ -38,6 +42,11 @@ button {
 	border: none;
 	cursor: pointer;
 	background-color: transparent;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
 }
 
 .popup {
@@ -117,15 +126,15 @@ li .menu-toggle:active {
 	color: var(--light-gray);	
 }
 
+.focus:hover {
+	color: var(--white);
+}
+
 /*-----Links Styling-----*/
 
 .module-button {
 	font-size: inherit;
 	padding: 0;
-}
-
-.module-button:hover {
-	color: var(--white);
 }
 
 .links {
@@ -178,10 +187,6 @@ li .menu-toggle:active {
 	font-size: 95%;
 	width: 100%;
     text-align: left;
-}
-
-.link-list .focus:hover {
-	color: var(--white);
 }
 
 .link-list i {
@@ -589,24 +594,108 @@ li .menu-toggle:active {
 
 /*-----Photo Credit Styling-----*/
 #photo-credit {
+	position: relative;
 	align-self: end;
+	font-size: 75%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
+#photo-credit > i {
+	font-size: 125%;
+	color: var(--medium-gray);
+}
+
+.credits {
+	position: absolute;
+    top: 0;
+    left: 15px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.credits span {
+	color: var(--light-gray);
+	transition: 0.25s;
+	cursor: default;
+}
+
+.credits:hover span {
+	transform: translateY(-7px);
+}
+
+.credits div {
+	position: absolute;
+	top: 0;
+	opacity: 0;
+	transition: 0.25s;
+	font-size: 90%;
+	display: flex;
+}
+
+.credits:hover div {
+	top: 10px;
+	opacity: 1;
+}
+
+.credits a {
+	padding-top: 1.5px;
+}
+
+.favorite i {
+	position: absolute;
+	top: 0;
+}
+
+.favorite .far {
+	color: var(--light-gray);
+}
+
+.favorite:hover .far {
+	color: var(--white);
+}
+
+.favorite .fas {
+	color: var(--white);
+}
 
 /*-----Quote Styling-----*/
 #quote {
 	align-self: end;
+	position: relative;
+	display: flex;
+	justify-content: center;
 }
 
-.quote {
+.quote-text {
 	text-align: center;
 	margin: 0;
+	transition: 0.25s;
+	font-size: 1.05em;
+}
+
+#quote:hover .quote-text {
+	transform: translateY(-7px);
 }
 
 .quote-author {
-	display: none;
+	position: absolute;
+	top: 0;
+	margin-top: -2px;
+	opacity: 0;
+	transition: 0.25s;
+	font-size: 82%;
+	padding-right: 8px;
+	display: flex;
+	color: var(--light-gray);
 }
 
+#quote:hover .quote-author {
+	opacity: 1;
+}
 
 /*-----Todo Styling-----*/
 #todo {

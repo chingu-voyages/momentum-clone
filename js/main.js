@@ -44,7 +44,7 @@ window.onload = function() {
 		let minutes = time.getMinutes();
 		minutes = (minutes < 10) ? "0" + minutes.toString() : minutes
 		clock.innerHTML = hours + ":" + minutes;
-		welcome.innerHTML = "Good " + partOfDay + ", " + userName;
+		welcome.innerHTML = "Good " + partOfDay + ", " + userName + ".";
 	};
 	setInterval(updateClock, 500);
 
@@ -309,7 +309,7 @@ window.onload = function() {
 		console.log("geolocation unavailable");
 	}
 
-	// Make API call
+	// Make weather API call
 	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
 		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
@@ -326,6 +326,60 @@ window.onload = function() {
 			}
 		}
 		req.send();
+	}
+
+	//Hide other elements on hovering over photo credits
+	let photoCredit = document.getElementById("photo-credit").getElementsByClassName("credits")[0];
+	let sections = document.getElementsByTagName("section");
+	let fadeText;
+	let hideText;
+	photoCredit.addEventListener("mouseover", (e) => {
+		fadeText = setTimeout(() => {
+			for (let i=0; i < sections.length; i++) {
+				if (sections[i].id !== "photo-credit") {
+					sections[i].style.opacity = "0";					
+					hideText = setTimeout(() => sections[i].style.visibility = "hidden", 500);
+				}
+			}
+		}, 4000)
+	})
+	photoCredit.addEventListener("mouseout", (e) => {
+		clearTimeout(fadeText);
+		clearTimeout(hideText);
+		for (let i=0; i < sections.length; i++) {
+			sections[i].style.opacity = "";					
+			sections[i].style.visibility = "";
+		}
+	})
+
+	//Reveal quote author on hover
+	let quoteBox = document.getElementById("quote");
+	let quote = quoteBox.getElementsByClassName("quote-text")[0];
+	let quoteAuthor = quoteBox.getElementsByClassName("quote-author")[0];
+
+	let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
+	window.addEventListener("resize", (e) => {
+		let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
+	});
+
+	quoteBox.addEventListener("mouseover", (e) => {
+		quoteAuthor.style.top = quoteHeight;
+	})
+
+	quoteBox.addEventListener("mouseout", (e) => {
+		quoteAuthor.style.top = "";
+	})
+
+	//Change favorite heart to solid on click
+	let favorite = document.getElementsByClassName("favorite");
+	for (let i=0; i < favorite.length; i++) {
+		let unfavHeart = favorite[i].getElementsByClassName("far")[0];
+		let favHeart = favorite[i].getElementsByClassName("fas")[0];
+		favHeart.style.opacity = "0";
+		favorite[i].addEventListener("click", (e) => {
+			favHeart.style.opacity = (favHeart.style.opacity === "0") ? "1" : "0";
+			unfavHeart.style.opacity = (unfavHeart.style.opacity === "0") ? "1" : "0";
+		})		
 	}
 
 	//Implement to do list transitions

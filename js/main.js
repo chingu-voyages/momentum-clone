@@ -2,7 +2,8 @@ window.onload = function() {
 	//Prompt user for name
 	let content = document.getElementsByTagName("main")[0];
 	let prompt = document.getElementsByClassName("prompt")[0];
-
+	content.style.display = "grid";
+	
 	content.style.visibility = "hidden";
 	prompt.style.visibility = "visible";
 	setTimeout(() => {

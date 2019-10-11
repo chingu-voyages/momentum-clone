@@ -324,6 +324,7 @@ li .menu-toggle:active {
 	justify-content: flex-start;
 	align-items: flex-end;
 	flex-direction: column;
+	margin-top: -7.5px;
 }
 
 #weather i {
@@ -337,11 +338,11 @@ li .menu-toggle:active {
 	align-items: center;
 	flex-direction: row;
 	cursor: pointer;
-	font-size: 24px;
+	font-size: 1.6em;
 }
 
 .temp-container .tooltip {
-	top: 39px;
+	top: 33px;
 	right: 6px;
 }
 
@@ -349,12 +350,12 @@ li .menu-toggle:active {
 	display: flex;
 	align-items: flex-start;
 	cursor: pointer;
-	font-size: 13px;
+	font-size: 0.83em;
 	color: var(--light-gray);
 }
 
 .city-container .tooltip {
-	top: 61px;
+	top: 55px;
 	right: 0px;
 }
 

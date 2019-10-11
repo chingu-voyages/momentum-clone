@@ -1,4 +1,11 @@
+window.addEventListener("DOMContentLoaded", (e) => {
+	document.getElementById("loading").style.opacity = "1";
+})
+
 window.onload = function() {
+	//Hide loading icon
+	document.getElementById("loading").style.opacity = "0";
+
 	//Prompt user for name
 	let content = document.getElementsByTagName("main")[0];
 	let prompt = document.getElementsByClassName("prompt")[0];

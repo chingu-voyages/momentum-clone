@@ -1,8 +1,16 @@
+window.addEventListener("DOMContentLoaded", (e) => {
+	document.getElementById("loading").style.opacity = "1";
+})
+
 window.onload = function() {
+	//Hide loading icon
+	document.getElementById("loading").style.opacity = "0";
+
 	//Prompt user for name
 	let content = document.getElementsByTagName("main")[0];
 	let prompt = document.getElementsByClassName("prompt")[0];
-
+	content.style.display = "grid";
+	
 	content.style.visibility = "hidden";
 	prompt.style.visibility = "visible";
 	setTimeout(() => {
@@ -299,16 +307,6 @@ window.onload = function() {
 	let city = document.getElementById("city");
 	let cityTooltip = document.getElementById("city-tooltip");
 
-	if ("geolocation" in navigator) { // Get user's location
-		navigator.geolocation.getCurrentPosition((pos) => {
-			let lat = pos.coords.latitude;
-			let lon = pos.coords.longitude;
-			fetchWeather(lat, lon);
-		});
-	} else {
-		console.log("geolocation unavailable");
-	}
-
 	// Make weather API call
 	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
@@ -326,6 +324,19 @@ window.onload = function() {
 			}
 		}
 		req.send();
+	}
+
+	//Use New York, New York as default location if none provided
+	let defaultLat = 40.7128;
+	let defaultLon = -74.0060;
+	fetchWeather(defaultLat, defaultLon);
+
+	if ("geolocation" in navigator) { // Get user's location
+		navigator.geolocation.getCurrentPosition((pos) => {
+			let lat = pos.coords.latitude;
+			let lon = pos.coords.longitude;
+			fetchWeather(lat, lon);
+		});
 	}
 
 	//Hide other elements on hovering over photo credits

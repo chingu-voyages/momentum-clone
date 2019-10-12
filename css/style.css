@@ -14,12 +14,12 @@ body {
 }
 
 main {
-	display: grid;
+	display: none;
 	height: 100vh;
 	padding: 20px;
 	box-sizing: border-box;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 3fr 3fr 1fr;
+	grid-template-columns: 1fr 3.5fr 1fr;
+	grid-template-rows: 1fr 5.5fr 3fr 1fr;
 	transition: opacity 0.5s;
 }
 
@@ -38,6 +38,7 @@ input {
 }
 
 button {
+	font-family: inherit;
 	outline: none;
 	border: none;
 	cursor: pointer;
@@ -108,10 +109,35 @@ li .menu-toggle:active {
 	width: 70px;
 	height: 25px;
 	color: inherit;
+	font-size: 85%;
 }
 
 .menu button:hover {
 	background-color: rgb(105, 105, 105);
+}
+
+/*---Loading Styling---*/
+#loading {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	font-size: 60px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: lightblue;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+}
+
+#loading span {
+	margin-top: -5px;
+	text-align: center;
 }
 
 /*-----Web Styling-----*/
@@ -133,7 +159,7 @@ li .menu-toggle:active {
 /*-----Links Styling-----*/
 
 .module-button {
-	font-size: inherit;
+	font-size: 1.05em;
 	padding: 0;
 }
 
@@ -143,17 +169,17 @@ li .menu-toggle:active {
 
 .links > div {
 	position: absolute;
-    top: 60px;
-    left: 7px;
-    width: 250px;
+	top: 60px;
+	left: 7px;
+	width: 250px;
 }
 
 .links .popup {
 	position: absolute;
-    transform: rotate(180deg);
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+	transform: rotate(180deg);
+	width: 100%;
+	height: 100%;
+	z-index: -1;
 }
 
 .links .popup-content {
@@ -184,9 +210,9 @@ li .menu-toggle:active {
 
 .link-list .focus {
 	padding: 4px 0px;
-	font-size: 95%;
+	font-size: 100%;
 	width: 100%;
-    text-align: left;
+	text-align: left;
 }
 
 .link-list i {
@@ -211,15 +237,15 @@ li .menu-toggle:active {
 	align-items: flex-start;
 	justify-content: space-between;
 	height: 245px;
-    padding: 10px 20px 20px 20px;
+	padding: 10px 20px 20px 20px;
 }
 
 .link-back {
 	border-radius: 50%;
 	color: var(--medium-gray);
 	width: 25px;
-    height: 25px;
-    margin-left: -6px;
+	height: 25px;
+	margin-left: -6px;
 }
 
 .link-back:hover {
@@ -230,7 +256,7 @@ li .menu-toggle:active {
 .link-form label {
 	font-size: 70%;
 	width: 100%;
-    font-weight: bold;
+	font-weight: bold;
 	color: rgba(255, 255, 255, 0.6);
 }
 
@@ -238,9 +264,9 @@ li .menu-toggle:active {
 	width: 100%;
 	border-color: var(--medium-gray);
 	padding: 6px 0px;
-    font-size: 1.3em;
-    color: var(--white);
-    transition: background-color 0.5s ease-out;
+	font-size: 1.3em;
+	color: var(--white);
+	transition: background-color 0.5s ease-out;
 }
 
 .link-form input:hover {
@@ -257,18 +283,19 @@ li .menu-toggle:active {
 
 .link-create {
 	color: var(--white);
-	background-color: var(--medium-gray);
+	background-color: var(--dark-gray);
+    font-size: 90%;
 	border-radius: 20px;
-    padding: 8px 25px;
-    margin-top: 25px;
+	padding: 8px 25px;
+	margin-top: 25px;
 }
 
 .link-create:hover {
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: var(--medium-gray);
 }
 
 .link-create:active {
-	background-color: var(--light-gray);
+	background-color: rgba(255, 255, 255, 0.6);
 }
 /*-----Search Bar Styling-----*/
 
@@ -324,6 +351,7 @@ li .menu-toggle:active {
 	justify-content: flex-start;
 	align-items: flex-end;
 	flex-direction: column;
+	margin-top: -7.5px;
 }
 
 #weather i {
@@ -337,11 +365,11 @@ li .menu-toggle:active {
 	align-items: center;
 	flex-direction: row;
 	cursor: pointer;
-	font-size: 24px;
+	font-size: 1.6em;
 }
 
 .temp-container .tooltip {
-	top: 39px;
+	top: 33px;
 	right: 6px;
 }
 
@@ -349,12 +377,12 @@ li .menu-toggle:active {
 	display: flex;
 	align-items: flex-start;
 	cursor: pointer;
-	font-size: 13px;
+	font-size: 0.83em;
 	color: var(--light-gray);
 }
 
 .city-container .tooltip {
-	top: 61px;
+	top: 55px;
 	right: 0px;
 }
 
@@ -380,18 +408,17 @@ li .menu-toggle:active {
 	grid-column: 1 / 4;
 	justify-self: center;
 	align-self: end;
-	margin-top: 25vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	text-shadow: 2px 2px 100px black;
 }
 
 .time {
 	font-size: 10.5em;
-	text-align: center;
-	margin: -25px 0;
-	z-index: -2;
-
+    text-align: center;
+    margin: -20px 0;
+    z-index: -2;
 }
 
 .welcome {
@@ -401,7 +428,7 @@ li .menu-toggle:active {
 }
 
 .prompt {
-	margin-top: 10vh;
+	margin-top: 40vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -459,13 +486,64 @@ li .menu-toggle:active {
 	}
 }
 
+/*---Shadow Overlays---*/
+.overlay {
+	width: 0;
+	height: 0;
+	transition: opacity 0.5s;
+}
+
+.shadow {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    border-radius: 50%;
+    opacity: 0.7;
+    box-shadow: 250px 0px 150px var(--black-gray);
+    z-index: -1;
+}
+
+.top-left {
+	top: -75px;
+	left: -375px;
+}
+
+.top-right {
+	top: -75px;
+	right: -375px;
+	transform: rotate(180deg);
+}
+
+.bottom-right {
+	bottom: -75px;
+	right: -375px;
+	transform: rotate(180deg);
+}
+
+.bottom-middle {
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 400px;
+	bottom: -250px;
+	border-radius: 30%;
+	box-shadow: 0px 150px 150px var(--black-gray);
+	transform: rotate(180deg);
+}
+
+.bottom-left {
+	bottom: -75px;
+	left: -375px;
+}
+
 /*-----Main Focus Styling-----*/
 #main-focus {
 	grid-column: 1 / 4;
 	justify-self: center; 
 	align-self: start;
-	font-size: 2.3em;
-	margin-top: 65px;
+	font-size: 2.2em;
+    margin-top: 88px;
+    text-shadow: 2px 2px 50px black;
 }
 
 #main-focus > div {
@@ -476,23 +554,23 @@ li .menu-toggle:active {
 }
 
 #main-focus .hint {
-    font-size: 0.5em;
-    transition: opacity 0.5s;
-    margin: 0;
-    font-weight: normal;
+	font-size: 0.5em;
+	transition: opacity 0.5s;
+	margin: 0;
+	font-weight: normal;
 }
 
 #input-screen > input {
 	text-align: center;
-    width: 100%;
-    margin-bottom: 12px;
+	width: 100%;
+	margin-top: 7px;
 }
 
 #output-screen > span {
 	font-size: 65%;
 	font-weight: bold;
 	margin-bottom: 7.5px;
-    margin-top: 7px;
+	margin-top: 7px;
 }
 
 .focus-output {
@@ -569,10 +647,10 @@ li .menu-toggle:active {
 	margin-top: 5.5px;
 	color: var(--medium-gray);
 	border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    padding-top: 2.3px;
-    transition: transform 0.5s;
+	width: 25px;
+	height: 25px;
+	padding-top: 2.3px;
+	transition: transform 0.5s;
 }
 
 .focus-output button:hover {
@@ -596,7 +674,7 @@ li .menu-toggle:active {
 #photo-credit {
 	position: relative;
 	align-self: end;
-	font-size: 75%;
+	font-size: 83%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -609,12 +687,13 @@ li .menu-toggle:active {
 
 .credits {
 	position: absolute;
-    top: 0;
-    left: 15px;
+	top: 0;
+	left: 15px;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	width: 100%;
 }
 
 .credits span {
@@ -624,7 +703,7 @@ li .menu-toggle:active {
 }
 
 .credits:hover span {
-	transform: translateY(-7px);
+	transform: translateY(-9px);
 }
 
 .credits div {
@@ -632,7 +711,7 @@ li .menu-toggle:active {
 	top: 0;
 	opacity: 0;
 	transition: 0.25s;
-	font-size: 90%;
+	font-size: 85%;
 	display: flex;
 }
 
@@ -674,7 +753,7 @@ li .menu-toggle:active {
 	text-align: center;
 	margin: 0;
 	transition: 0.25s;
-	font-size: 1.05em;
+	font-size: 1.12em;
 }
 
 #quote:hover .quote-text {
@@ -687,10 +766,10 @@ li .menu-toggle:active {
 	margin-top: -2px;
 	opacity: 0;
 	transition: 0.25s;
-	font-size: 82%;
-	padding-right: 8px;
-	display: flex;
-	color: var(--light-gray);
+	font-size: 85%;
+    padding-right: 8px;
+    display: flex;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 #quote:hover .quote-author {
@@ -739,7 +818,6 @@ li .menu-toggle:active {
 	padding: 0px 0px 0px 5px;
 	margin-left: 3px;
 	margin-right: 9px;
-	font-size: 95%;
 }
 
 #todo li input:checked + span {
@@ -790,6 +868,7 @@ li .menu-toggle:active {
 	padding: 8px 27px;
 	margin-bottom: 47px;
 	transition: opacity 0.2s;
+    font-size: 85%;
 }
 
 #todo .popup > div button:hover {
@@ -797,7 +876,7 @@ li .menu-toggle:active {
 }
 
 #todo input[type=text] {
-	font-size: 95%;
+	font-size: 100%;
 	border-bottom: none;
 }
 

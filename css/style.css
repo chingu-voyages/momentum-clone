@@ -18,8 +18,8 @@ main {
 	height: 100vh;
 	padding: 20px;
 	box-sizing: border-box;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 3fr 3fr 1fr;
+	grid-template-columns: 1fr 3.5fr 1fr;
+	grid-template-rows: 1fr 5.5fr 3fr 1fr;
 	transition: opacity 0.5s;
 }
 
@@ -38,6 +38,7 @@ input {
 }
 
 button {
+	font-family: inherit;
 	outline: none;
 	border: none;
 	cursor: pointer;
@@ -108,6 +109,7 @@ li .menu-toggle:active {
 	width: 70px;
 	height: 25px;
 	color: inherit;
+	font-size: 85%;
 }
 
 .menu button:hover {
@@ -157,7 +159,7 @@ li .menu-toggle:active {
 /*-----Links Styling-----*/
 
 .module-button {
-	font-size: inherit;
+	font-size: 1.05em;
 	padding: 0;
 }
 
@@ -208,7 +210,7 @@ li .menu-toggle:active {
 
 .link-list .focus {
 	padding: 4px 0px;
-	font-size: 95%;
+	font-size: 100%;
 	width: 100%;
 	text-align: left;
 }
@@ -281,18 +283,19 @@ li .menu-toggle:active {
 
 .link-create {
 	color: var(--white);
-	background-color: var(--medium-gray);
+	background-color: var(--dark-gray);
+    font-size: 90%;
 	border-radius: 20px;
 	padding: 8px 25px;
 	margin-top: 25px;
 }
 
 .link-create:hover {
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: var(--medium-gray);
 }
 
 .link-create:active {
-	background-color: var(--light-gray);
+	background-color: rgba(255, 255, 255, 0.6);
 }
 /*-----Search Bar Styling-----*/
 
@@ -405,19 +408,17 @@ li .menu-toggle:active {
 	grid-column: 1 / 4;
 	justify-self: center;
 	align-self: end;
-	margin-top: 25vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-shadow: 2px 2px 50px var(--black-gray);
+	text-shadow: 2px 2px 100px black;
 }
 
 .time {
 	font-size: 10.5em;
-	text-align: center;
-	margin: -25px 0;
-	z-index: -2;
-
+    text-align: center;
+    margin: -20px 0;
+    z-index: -2;
 }
 
 .welcome {
@@ -427,7 +428,7 @@ li .menu-toggle:active {
 }
 
 .prompt {
-	margin-top: 10vh;
+	margin-top: 40vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -493,14 +494,13 @@ li .menu-toggle:active {
 }
 
 .shadow {
-	position: absolute;
-	width: 250px;
-	height: 150px;
-	border-radius: 50%;
-	opacity: 0.3;
-	background-color: var(--black-gray);
-	box-shadow: 250px 0px 90px var(--black-gray);
-	z-index: -1;
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    border-radius: 50%;
+    opacity: 0.7;
+    box-shadow: 250px 0px 150px var(--black-gray);
+    z-index: -1;
 }
 
 .top-left {
@@ -527,7 +527,7 @@ li .menu-toggle:active {
 	width: 400px;
 	bottom: -250px;
 	border-radius: 30%;
-	box-shadow: 0px 150px 90px var(--black-gray);
+	box-shadow: 0px 150px 150px var(--black-gray);
 	transform: rotate(180deg);
 }
 
@@ -541,8 +541,9 @@ li .menu-toggle:active {
 	grid-column: 1 / 4;
 	justify-self: center; 
 	align-self: start;
-	font-size: 2.3em;
-	margin-top: 65px;
+	font-size: 2.2em;
+    margin-top: 88px;
+    text-shadow: 2px 2px 50px black;
 }
 
 #main-focus > div {
@@ -562,7 +563,7 @@ li .menu-toggle:active {
 #input-screen > input {
 	text-align: center;
 	width: 100%;
-	margin-bottom: 12px;
+	margin-top: 7px;
 }
 
 #output-screen > span {
@@ -673,7 +674,7 @@ li .menu-toggle:active {
 #photo-credit {
 	position: relative;
 	align-self: end;
-	font-size: 75%;
+	font-size: 83%;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -692,6 +693,7 @@ li .menu-toggle:active {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	width: 100%;
 }
 
 .credits span {
@@ -701,7 +703,7 @@ li .menu-toggle:active {
 }
 
 .credits:hover span {
-	transform: translateY(-7px);
+	transform: translateY(-9px);
 }
 
 .credits div {
@@ -709,7 +711,7 @@ li .menu-toggle:active {
 	top: 0;
 	opacity: 0;
 	transition: 0.25s;
-	font-size: 90%;
+	font-size: 85%;
 	display: flex;
 }
 
@@ -751,7 +753,7 @@ li .menu-toggle:active {
 	text-align: center;
 	margin: 0;
 	transition: 0.25s;
-	font-size: 1.05em;
+	font-size: 1.12em;
 }
 
 #quote:hover .quote-text {
@@ -764,10 +766,10 @@ li .menu-toggle:active {
 	margin-top: -2px;
 	opacity: 0;
 	transition: 0.25s;
-	font-size: 82%;
-	padding-right: 8px;
-	display: flex;
-	color: var(--light-gray);
+	font-size: 85%;
+    padding-right: 8px;
+    display: flex;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 #quote:hover .quote-author {
@@ -816,7 +818,6 @@ li .menu-toggle:active {
 	padding: 0px 0px 0px 5px;
 	margin-left: 3px;
 	margin-right: 9px;
-	font-size: 95%;
 }
 
 #todo li input:checked + span {
@@ -867,6 +868,7 @@ li .menu-toggle:active {
 	padding: 8px 27px;
 	margin-bottom: 47px;
 	transition: opacity 0.2s;
+    font-size: 85%;
 }
 
 #todo .popup > div button:hover {
@@ -874,7 +876,7 @@ li .menu-toggle:active {
 }
 
 #todo input[type=text] {
-	font-size: 95%;
+	font-size: 100%;
 	border-bottom: none;
 }
 

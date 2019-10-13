@@ -101,6 +101,8 @@ window.onload = function() {
 	let congratsMessages = ["Good job!", "Nice.", "Way to go!", "Great work!"];
 	let showCongrats
 	let focusCheckBox = focusCheck.getElementsByTagName("input")[0];
+	congrats.style.opacity = "0";
+
 	focusCheckBox.addEventListener("change", (e) => {
 		if (focusCheckBox.checked) {
 			focusTask.style.textDecoration = "line-through";
@@ -368,14 +370,17 @@ window.onload = function() {
 	let quote = quoteBox.getElementsByClassName("quote-text")[0];
 	let quoteAuthor = quoteBox.getElementsByClassName("quote-author")[0];
 
-	let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
-	window.addEventListener("resize", (e) => {
+	let positionAuthor = function() {
 		let quoteHeight = window.getComputedStyle(quote, null).getPropertyValue("height");
-	});
+		quoteBox.addEventListener("mouseover", (e) => {
+			quoteAuthor.style.top = quoteHeight;
+		})
+	};
 
-	quoteBox.addEventListener("mouseover", (e) => {
-		quoteAuthor.style.top = quoteHeight;
-	})
+	positionAuthor();
+	window.addEventListener("resize", (e) => {
+		positionAuthor();
+	});
 
 	quoteBox.addEventListener("mouseout", (e) => {
 		quoteAuthor.style.top = "";

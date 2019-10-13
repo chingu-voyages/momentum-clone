@@ -312,7 +312,7 @@ window.onload = function() {
 	// Make weather API call
 	let fetchWeather = function(lat, lon) { 
 		let req = new XMLHttpRequest();
-		req.open("GET", "https://api.weatherbit.io/v2.0/current?" + "&lat=" + lat + "&lon=" + lon + "&key=" + config.WEATHER_KEY, true);
+		req.open("GET", "https://1seaks5sjd.execute-api.us-east-2.amazonaws.com/beta/?" + "lat=" + lat + "&lon=" + lon, true);
 		req.onload = function() {
 			if (req.status === 200) {
 				let weatherData = JSON.parse(this.response).data[0];	

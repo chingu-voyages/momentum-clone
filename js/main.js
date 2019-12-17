@@ -421,9 +421,12 @@ window.onload = function() {
 				todoNew.style.visibility = "visible";
 				todoNew.style.opacity = "1";
 				todoInput.style.visibility = "hidden";
+				todoStart.style.visibility = "visible";
+				todoStart.style.display = "";
 			}
 		} else {
 			[todoBox, todoNew, todoInput, todoList].forEach((element) => element.style.visibility = "hidden");
+			todoStart.style.display = "none";
 			todoToggle.style.color = "";
 		}
 	});	

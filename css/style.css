@@ -16,11 +16,14 @@ body {
 main {
 	display: none;
 	height: 100vh;
+	width: 100vw;
 	padding: 20px;
 	box-sizing: border-box;
 	grid-template-columns: 1fr 3.5fr 1fr;
 	grid-template-rows: 1fr 5.5fr 3fr 1fr;
 	transition: opacity 0.5s;
+	overflow: hidden;
+    position: fixed;
 }
 
 section {
@@ -145,6 +148,10 @@ li .menu-toggle:active {
 	display: flex;
 	height: 30px;
 	width: 300px;
+}
+
+#city {
+	text-align: center;
 }
 
 .focus {
@@ -881,6 +888,12 @@ li .menu-toggle:active {
 	}
 }
 
+@media only screen and (max-height: 650px) and (max-width: 400px) {
+	#greeting {
+		margin-top: 20vh;
+	}
+}
+
 @media only screen and (max-height: 600px) {
 	#web, #todo, #quote {
 		font-size: 0.9em;
@@ -927,5 +940,51 @@ li .menu-toggle:active {
 @media only screen and (max-width: 582px) {
 	#quote {
 		visibility: hidden;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	#greeting {
+		font-size: 0.8em;
+	}
+	#main-focus {
+		font-size: 2em;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	#web {
+		width: 250px;
+	}
+	.search input {
+		width: 140px;
+	}
+	.fa-google {
+		left: 247px;
+	}
+	#greeting {
+		font-size: 0.7em;
+	}
+	#main-focus {
+		font-size: 1.9em;
+	}
+}
+
+
+@media only screen and (max-width: 330px) {
+	#web {
+		width: 215px;
+	}
+	.search input {
+		width: 105px;
+	}
+	.fa-google {
+		left: 212px;
+	}
+	#greeting {
+		font-size: 0.5em;
+	}
+	#main-focus {
+		font-size: 1.7em;
 	}
 }

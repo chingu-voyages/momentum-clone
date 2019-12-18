@@ -10,7 +10,6 @@ body {
 	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
-  	background-size: cover;
 	font-family: neue-haas-grotesk-text, sans-serif;
 	color: var(--white);
 	margin: 0;
@@ -893,12 +892,6 @@ li .menu-toggle:active {
 	}
 }
 
-@media only screen and (max-height: 650px) and (max-width: 400px) {
-	#greeting {
-		margin-top: 20vh;
-	}
-}
-
 @media only screen and (max-height: 600px) {
 	#web, #todo, #quote {
 		font-size: 0.9em;
@@ -943,6 +936,9 @@ li .menu-toggle:active {
 }
 
 @media only screen and (max-width: 582px) {
+	#greeting {
+		margin-top: 0;
+	}
 	#quote {
 		visibility: hidden;
 	}

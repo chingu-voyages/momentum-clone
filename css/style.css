@@ -7,10 +7,15 @@ body {
 	--black-gray: rgba(0, 0, 0, 0.85);
 	background: url("../img/default.jpg") no-repeat center center fixed;
 	background-size: cover;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 	font-family: neue-haas-grotesk-text, sans-serif;
 	color: var(--white);
 	margin: 0;
 	overflow: hidden;
+	height: 100vh;
 }
 
 main {
